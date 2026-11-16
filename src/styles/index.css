@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --color-ivory: #faf7f0;
+  --color-warm-white: #ffffff;
+  --color-sand: #e8d9c5;
+  --color-camel: #c19a6b;
+  --color-desert: #a77b52;
+  --color-chocolate: #654735;
+  --color-deep-brown: #30251f;
+  --color-soft-gray: #81786f;
+
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Outfit', system-ui, sans-serif;
+
+  --shadow-soft: 0 20px 50px rgb(48 37 31 / 0.08);
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body {
+    margin: 0;
+    min-width: 320px;
+    overflow-x: hidden;
+    background: var(--color-ivory);
+    color: var(--color-deep-brown);
+    font-family: var(--font-sans);
+    font-weight: 400;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  #root {
+    overflow-x: hidden;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--color-camel) 40%, white);
+    color: var(--color-deep-brown);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-camel);
+    outline-offset: 3px;
+  }
+}
+
+@layer utilities {
+  .font-serif {
+    font-family: var(--font-serif);
+  }
+
+  .font-sans {
+    font-family: var(--font-sans);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .section-pad {
+    padding-inline: clamp(1.25rem, 4vw, 4rem);
+  }
+
+  .container-narrow {
+    width: min(100%, 72rem);
+    margin-inline: auto;
+  }
+
+  .container-wide {
+    width: min(100%, 90rem);
+    margin-inline: auto;
+  }
+
+  .editorial-rule {
+    height: 1px;
+    background: color-mix(in srgb, var(--color-sand) 80%, var(--color-camel));
+    border: 0;
+  }
+}

@@ -1,0 +1,653 @@
+{
+  "generatedAt": "2026-11-16T07:06:55.083Z",
+  "gallery": [
+    {
+      "id": "p001",
+      "src": "/media/photos/p001-dsc00638-jpg.jpg",
+      "alt": "Shaan Photography — DSC00638.JPG",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "DSC00638.JPG.jpeg"
+    },
+    {
+      "id": "p002",
+      "src": "/media/photos/p002-dsc01625-jpg.jpg",
+      "alt": "Shaan Photography — DSC01625.JPG",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "DSC01625.JPG.jpeg"
+    },
+    {
+      "id": "p003",
+      "src": "/media/photos/p003-dsc01685-jpg.jpg",
+      "alt": "Shaan Photography — DSC01685.JPG",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "DSC01685.JPG.jpeg"
+    },
+    {
+      "id": "p004",
+      "src": "/media/photos/p004-dsc01710-jpg.jpg",
+      "alt": "Shaan Photography — DSC01710.JPG",
+      "orientation": "landscape",
+      "width": 1920,
+      "height": 1280,
+      "sourceFile": "DSC01710.JPG.jpeg"
+    },
+    {
+      "id": "p005",
+      "src": "/media/photos/p005-dsc01723-jpg.jpg",
+      "alt": "Shaan Photography — DSC01723.JPG",
+      "orientation": "landscape",
+      "width": 1920,
+      "height": 1280,
+      "sourceFile": "DSC01723.JPG.jpeg"
+    },
+    {
+      "id": "p006",
+      "src": "/media/photos/p006-dsc01763-jpg.jpg",
+      "alt": "Shaan Photography — DSC01763.JPG",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "DSC01763.JPG.jpeg"
+    },
+    {
+      "id": "p007",
+      "src": "/media/photos/p007-dsc01822-jpg.jpg",
+      "alt": "Shaan Photography — DSC01822.JPG",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "DSC01822.JPG.jpeg"
+    },
+    {
+      "id": "p008",
+      "src": "/media/photos/p008-dsc01867-jpg.jpg",
+      "alt": "Shaan Photography — DSC01867.JPG",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "DSC01867.JPG.jpeg"
+    },
+    {
+      "id": "p009",
+      "src": "/media/photos/p009-dsc02125-jpg.jpg",
+      "alt": "Shaan Photography — DSC02125.JPG",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "DSC02125.JPG.jpeg"
+    },
+    {
+      "id": "p010",
+      "src": "/media/photos/p010-dsc02161-jpg.jpg",
+      "alt": "Shaan Photography — DSC02161.JPG",
+      "orientation": "landscape",
+      "width": 1920,
+      "height": 1280,
+      "sourceFile": "DSC02161.JPG.jpeg"
+    },
+    {
+      "id": "p011",
+      "src": "/media/photos/p011-dsc02233-jpg.jpg",
+      "alt": "Shaan Photography — DSC02233.JPG",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "DSC02233.JPG.jpeg"
+    },
+    {
+      "id": "p012",
+      "src": "/media/photos/p012-dsc02314-jpg.jpg",
+      "alt": "Shaan Photography — DSC02314.JPG",
+      "orientation": "landscape",
+      "width": 1920,
+      "height": 1280,
+      "sourceFile": "DSC02314.JPG.jpeg"
+    },
+    {
+      "id": "p013",
+      "src": "/media/photos/p013-dsc02436-jpg.jpg",
+      "alt": "Shaan Photography — DSC02436.JPG",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "DSC02436.JPG.jpeg"
+    },
+    {
+      "id": "p014",
+      "src": "/media/photos/p014-dsc02459-jpg.jpg",
+      "alt": "Shaan Photography — DSC02459.JPG",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "DSC02459.JPG.jpeg"
+    },
+    {
+      "id": "p015",
+      "src": "/media/photos/p015-dsc02541-jpg.jpg",
+      "alt": "Shaan Photography — DSC02541.JPG",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "DSC02541.JPG.jpeg"
+    },
+    {
+      "id": "p016",
+      "src": "/media/photos/p016-dsc02658-jpg.jpg",
+      "alt": "Shaan Photography — DSC02658.JPG",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "DSC02658.JPG.jpeg"
+    },
+    {
+      "id": "p017",
+      "src": "/media/photos/p017-dsc02837-jpg.jpg",
+      "alt": "Shaan Photography — DSC02837.JPG",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "DSC02837.JPG.jpeg"
+    },
+    {
+      "id": "p018",
+      "src": "/media/photos/p018-dsc03169-jpg.jpg",
+      "alt": "Shaan Photography — DSC03169.JPG",
+      "orientation": "landscape",
+      "width": 1920,
+      "height": 1280,
+      "sourceFile": "DSC03169.JPG.jpeg"
+    },
+    {
+      "id": "p019",
+      "src": "/media/photos/p019-dsc03196-jpg.jpg",
+      "alt": "Shaan Photography — DSC03196.JPG",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "DSC03196.JPG.jpeg"
+    },
+    {
+      "id": "p020",
+      "src": "/media/photos/p020-dsc03909-jpg.jpg",
+      "alt": "Shaan Photography — DSC03909.JPG",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "DSC03909.JPG.jpeg"
+    },
+    {
+      "id": "p021",
+      "src": "/media/photos/p021-dsc04465-jpg.jpg",
+      "alt": "Shaan Photography — DSC04465 copy.jpg",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "DSC04465 copy.jpg.jpeg"
+    },
+    {
+      "id": "p022",
+      "src": "/media/photos/p022-dsc04510-jpg.jpg",
+      "alt": "Shaan Photography — DSC04510 copy.jpg",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "DSC04510 copy.jpg.jpeg"
+    },
+    {
+      "id": "p023",
+      "src": "/media/photos/p023-dsc04545-jpg.jpg",
+      "alt": "Shaan Photography — DSC04545.JPG",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "DSC04545.JPG.jpeg"
+    },
+    {
+      "id": "p024",
+      "src": "/media/photos/p024-dsc04563-jpg.jpg",
+      "alt": "Shaan Photography — DSC04563.JPG",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "DSC04563.JPG.jpeg"
+    },
+    {
+      "id": "p025",
+      "src": "/media/photos/p025-dsc05335-jpg.jpg",
+      "alt": "Shaan Photography — DSC05335.JPG",
+      "orientation": "landscape",
+      "width": 1920,
+      "height": 1280,
+      "sourceFile": "DSC05335.JPG.jpeg"
+    },
+    {
+      "id": "p026",
+      "src": "/media/photos/p026-dsc05365-jpg.jpg",
+      "alt": "Shaan Photography — DSC05365.JPG",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "DSC05365.JPG.jpeg"
+    },
+    {
+      "id": "p027",
+      "src": "/media/photos/p027-dsc05392-jpg.jpg",
+      "alt": "Shaan Photography — DSC05392.JPG",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "DSC05392.JPG.jpeg"
+    },
+    {
+      "id": "p028",
+      "src": "/media/photos/p028-dsc05404-jpg.jpg",
+      "alt": "Shaan Photography — DSC05404.JPG",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "DSC05404.JPG.jpeg"
+    },
+    {
+      "id": "p029",
+      "src": "/media/photos/p029-dsc05410-jpg.jpg",
+      "alt": "Shaan Photography — DSC05410.JPG",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "DSC05410.JPG.jpeg"
+    },
+    {
+      "id": "p030",
+      "src": "/media/photos/p030-dsc05411-jpg.jpg",
+      "alt": "Shaan Photography — DSC05411.JPG",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "DSC05411.JPG.jpeg"
+    },
+    {
+      "id": "p031",
+      "src": "/media/photos/p031-dsc05452-jpg.jpg",
+      "alt": "Shaan Photography — DSC05452.JPG",
+      "orientation": "landscape",
+      "width": 1920,
+      "height": 1280,
+      "sourceFile": "DSC05452.JPG.jpeg"
+    },
+    {
+      "id": "p032",
+      "src": "/media/photos/p032-dsc05496-jpg.jpg",
+      "alt": "Shaan Photography — DSC05496 copy.jpg",
+      "orientation": "landscape",
+      "width": 1920,
+      "height": 1280,
+      "sourceFile": "DSC05496 copy.jpg.jpeg"
+    },
+    {
+      "id": "p033",
+      "src": "/media/photos/p033-dsc05934-jpg.jpg",
+      "alt": "Shaan Photography — DSC05934.JPG",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "DSC05934.JPG.jpeg"
+    },
+    {
+      "id": "p034",
+      "src": "/media/photos/p034-dsc05948-jpg.jpg",
+      "alt": "Shaan Photography — DSC05948.JPG",
+      "orientation": "landscape",
+      "width": 1920,
+      "height": 1280,
+      "sourceFile": "DSC05948.JPG.jpeg"
+    },
+    {
+      "id": "p035",
+      "src": "/media/photos/p035-dsc05989-jpg.jpg",
+      "alt": "Shaan Photography — DSC05989.JPG",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "DSC05989.JPG.jpeg"
+    },
+    {
+      "id": "p036",
+      "src": "/media/photos/p036-dsc06040-jpg.jpg",
+      "alt": "Shaan Photography — DSC06040.JPG",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "DSC06040.JPG.jpeg"
+    },
+    {
+      "id": "p037",
+      "src": "/media/photos/p037-dsc06654-jpg.jpg",
+      "alt": "Shaan Photography — DSC06654.JPG",
+      "orientation": "landscape",
+      "width": 1920,
+      "height": 1280,
+      "sourceFile": "DSC06654.JPG.jpeg"
+    },
+    {
+      "id": "p038",
+      "src": "/media/photos/p038-dsc06726-jpg.jpg",
+      "alt": "Shaan Photography — DSC06726.JPG",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "DSC06726.JPG.jpeg"
+    },
+    {
+      "id": "p039",
+      "src": "/media/photos/p039-dsc06915-jpg.jpg",
+      "alt": "Shaan Photography — DSC06915.JPG",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "DSC06915.JPG.jpeg"
+    },
+    {
+      "id": "p040",
+      "src": "/media/photos/p040-dsc06964-jpg.jpg",
+      "alt": "Shaan Photography — DSC06964.JPG",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "DSC06964.JPG.jpeg"
+    },
+    {
+      "id": "p041",
+      "src": "/media/photos/p041-dsc07012-jpg.jpg",
+      "alt": "Shaan Photography — DSC07012.JPG",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "DSC07012.JPG.jpeg"
+    },
+    {
+      "id": "p042",
+      "src": "/media/photos/p042-dsc07469-jpg.jpg",
+      "alt": "Shaan Photography — DSC07469.JPG",
+      "orientation": "landscape",
+      "width": 1920,
+      "height": 1280,
+      "sourceFile": "DSC07469.JPG.jpeg"
+    },
+    {
+      "id": "p043",
+      "src": "/media/photos/p043-dsc07493-jpg.jpg",
+      "alt": "Shaan Photography — DSC07493.jpg",
+      "orientation": "landscape",
+      "width": 1920,
+      "height": 1280,
+      "sourceFile": "DSC07493.jpg.jpeg"
+    },
+    {
+      "id": "p044",
+      "src": "/media/photos/p044-dsc07562-jpg.jpg",
+      "alt": "Shaan Photography — DSC07562.jpg",
+      "orientation": "landscape",
+      "width": 1920,
+      "height": 1280,
+      "sourceFile": "DSC07562.jpg.jpeg"
+    },
+    {
+      "id": "p045",
+      "src": "/media/photos/p045-dsc07863-jpg.jpg",
+      "alt": "Shaan Photography — DSC07863.JPG",
+      "orientation": "landscape",
+      "width": 1920,
+      "height": 1280,
+      "sourceFile": "DSC07863.JPG.jpeg"
+    },
+    {
+      "id": "p046",
+      "src": "/media/photos/p046-dsc07912-jpg.jpg",
+      "alt": "Shaan Photography — DSC07912.JPG",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "DSC07912.JPG.jpeg"
+    },
+    {
+      "id": "p047",
+      "src": "/media/photos/p047-dsc07928-jpg.jpg",
+      "alt": "Shaan Photography — DSC07928.jpg",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "DSC07928.jpg.jpeg"
+    },
+    {
+      "id": "p048",
+      "src": "/media/photos/p048-dsc07938-jpg.jpg",
+      "alt": "Shaan Photography — DSC07938.jpg",
+      "orientation": "landscape",
+      "width": 1920,
+      "height": 1280,
+      "sourceFile": "DSC07938.jpg.jpeg"
+    },
+    {
+      "id": "p049",
+      "src": "/media/photos/p049-dsc07969-jpg.jpg",
+      "alt": "Shaan Photography — DSC07969.jpg",
+      "orientation": "landscape",
+      "width": 1920,
+      "height": 1280,
+      "sourceFile": "DSC07969.jpg.jpeg"
+    },
+    {
+      "id": "p050",
+      "src": "/media/photos/p050-dsc07998-jpg.jpg",
+      "alt": "Shaan Photography — DSC07998.jpg",
+      "orientation": "landscape",
+      "width": 1920,
+      "height": 1280,
+      "sourceFile": "DSC07998.jpg.jpeg"
+    },
+    {
+      "id": "p051",
+      "src": "/media/photos/p051-dsc08001-jpg.jpg",
+      "alt": "Shaan Photography — DSC08001.jpg",
+      "orientation": "landscape",
+      "width": 1920,
+      "height": 1280,
+      "sourceFile": "DSC08001.jpg.jpeg"
+    },
+    {
+      "id": "p052",
+      "src": "/media/photos/p052-dsc08008-jpg.jpg",
+      "alt": "Shaan Photography — DSC08008.jpg",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "DSC08008.jpg.jpeg"
+    },
+    {
+      "id": "p053",
+      "src": "/media/photos/p053-dsc08042-jpg.jpg",
+      "alt": "Shaan Photography — DSC08042.jpg",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "DSC08042.jpg.jpeg"
+    },
+    {
+      "id": "p054",
+      "src": "/media/photos/p054-dsc08081-jpg.jpg",
+      "alt": "Shaan Photography — DSC08081.JPG",
+      "orientation": "landscape",
+      "width": 1920,
+      "height": 1280,
+      "sourceFile": "DSC08081.JPG.jpeg"
+    },
+    {
+      "id": "p055",
+      "src": "/media/photos/p055-dsc08085-jpg.jpg",
+      "alt": "Shaan Photography — DSC08085.jpg",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "DSC08085.jpg.jpeg"
+    },
+    {
+      "id": "p056",
+      "src": "/media/photos/p056-dsc08110-jpg.jpg",
+      "alt": "Shaan Photography — DSC08110.jpg",
+      "orientation": "landscape",
+      "width": 1920,
+      "height": 1280,
+      "sourceFile": "DSC08110.jpg.jpeg"
+    },
+    {
+      "id": "p057",
+      "src": "/media/photos/p057-dsc08194-jpg.jpg",
+      "alt": "Shaan Photography — DSC08194.jpg",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "DSC08194.jpg.jpeg"
+    },
+    {
+      "id": "p058",
+      "src": "/media/photos/p058-dsc08256-jpg.jpg",
+      "alt": "Shaan Photography — DSC08256.jpg",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "DSC08256.jpg.jpeg"
+    },
+    {
+      "id": "p059",
+      "src": "/media/photos/p059-dsc08261-jpg.jpg",
+      "alt": "Shaan Photography — DSC08261.JPG",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "DSC08261.JPG.jpeg"
+    },
+    {
+      "id": "p060",
+      "src": "/media/photos/p060-dsc08272-jpg.jpg",
+      "alt": "Shaan Photography — DSC08272 copy.jpg",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "DSC08272 copy.jpg.jpeg"
+    },
+    {
+      "id": "p061",
+      "src": "/media/photos/p061-dsc08334-jpg.jpg",
+      "alt": "Shaan Photography — DSC08334.JPG",
+      "orientation": "landscape",
+      "width": 1920,
+      "height": 1280,
+      "sourceFile": "DSC08334.JPG.jpeg"
+    },
+    {
+      "id": "p062",
+      "src": "/media/photos/p062-dsc08345-jpg.jpg",
+      "alt": "Shaan Photography — DSC08345.JPG",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "DSC08345.JPG.jpeg"
+    },
+    {
+      "id": "p063",
+      "src": "/media/photos/p063-dsc08797-jpg.jpg",
+      "alt": "Shaan Photography — DSC08797.jpg",
+      "orientation": "landscape",
+      "width": 1920,
+      "height": 1280,
+      "sourceFile": "DSC08797.jpg.jpeg"
+    },
+    {
+      "id": "p064",
+      "src": "/media/photos/p064-dsc08832-jpg.jpg",
+      "alt": "Shaan Photography — DSC08832.jpg",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "DSC08832.jpg.jpeg"
+    },
+    {
+      "id": "p065",
+      "src": "/media/photos/p065-dsc08879-jpg.jpg",
+      "alt": "Shaan Photography — DSC08879.jpg",
+      "orientation": "landscape",
+      "width": 1920,
+      "height": 1280,
+      "sourceFile": "DSC08879.jpg.jpeg"
+    },
+    {
+      "id": "p066",
+      "src": "/media/photos/p066-dsc08912-jpg.jpg",
+      "alt": "Shaan Photography — DSC08912.jpg",
+      "orientation": "landscape",
+      "width": 1920,
+      "height": 1280,
+      "sourceFile": "DSC08912.jpg.jpeg"
+    },
+    {
+      "id": "p067",
+      "src": "/media/photos/p067-dsc09100-jpg.jpg",
+      "alt": "Shaan Photography — DSC09100.jpg",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "DSC09100.jpg.jpeg"
+    },
+    {
+      "id": "p068",
+      "src": "/media/photos/p068-dsc09102-jpg.jpg",
+      "alt": "Shaan Photography — DSC09102.jpg",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "DSC09102.jpg.jpeg"
+    },
+    {
+      "id": "p069",
+      "src": "/media/photos/p069-dsc09127-jpg.jpg",
+      "alt": "Shaan Photography — DSC09127.jpg",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "DSC09127.jpg.jpeg"
+    },
+    {
+      "id": "p070",
+      "src": "/media/photos/p070-dsc09150-jpg.jpg",
+      "alt": "Shaan Photography — DSC09150.jpg",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "DSC09150.jpg.jpeg"
+    },
+    {
+      "id": "p071",
+      "src": "/media/photos/p071-img-6360-jpg.jpg",
+      "alt": "Shaan Photography — IMG_6360.JPG",
+      "orientation": "portrait",
+      "width": 1280,
+      "height": 1920,
+      "sourceFile": "IMG_6360.JPG.jpeg"
+    }
+  ],
+  "videos": [
+    {
+      "id": "karan-aangi-pre-wedding",
+      "src": "/media/videos/karan-aangi-pre-wedding.mp4",
+      "poster": "/media/posters/karan-aangi-pre-wedding.jpg",
+      "title": "KARAN & AANGI PRE WEDDING",
+      "sizeMb": 73.8
+    }
+  ]
+}

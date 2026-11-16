@@ -1,0 +1,40 @@
+{
+  "heroVideoId": "aryan-vishwa-save-the-date",
+  "videos": [
+    {
+      "id": "001-karan-aangi-save-the-date",
+      "src": "/media/videos/001-karan-aangi-save-the-date.mp4",
+      "poster": "/media/posters/001-karan-aangi-save-the-date.jpg",
+      "title": "Karan & Aangi — Save the Date",
+      "sizeMb": 12.7
+    },
+    {
+      "id": "aangi-wed-teaser",
+      "src": "/media/videos/aangi-wed-teaser.mp4",
+      "poster": "/media/posters/aangi-wed-teaser.jpg",
+      "title": "Aangi — Wedding Teaser",
+      "sizeMb": 25.9
+    },
+    {
+      "id": "aryan-vishwa-save-the-date",
+      "src": "/media/videos/aryan-vishwa-save-the-date.mp4",
+      "poster": "/media/posters/aryan-vishwa-save-the-date.jpg",
+      "title": "Aryan & Vishwa — Save the Date",
+      "sizeMb": 11.3
+    },
+    {
+      "id": "hardik-vishakha-wedding-teaser-by-shaan-photography",
+      "src": "/media/videos/hardik-vishakha-wedding-teaser-by-shaan-photography.mp4",
+      "poster": "/media/posters/hardik-vishakha-wedding-teaser-by-shaan-photography.jpg",
+      "title": "Hardik & Vishakha — Wedding Teaser",
+      "sizeMb": 34.9
+    },
+    {
+      "id": "karan-aangi-pre-wedding",
+      "src": "/media/videos/karan-aangi-pre-wedding.mp4",
+      "poster": "/media/posters/karan-aangi-pre-wedding.jpg",
+      "title": "Karan & Aangi — Pre Wedding",
+      "sizeMb": 30.5
+    }
+  ]
+}
