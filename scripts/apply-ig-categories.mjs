@@ -39,9 +39,14 @@ if (src.includes('// === IG_IMPORT_ASSIGN ===')) {
 }
 
 // Widen auto-fill so new pIDs without explicit cat still appear
+const maxIdx = Math.max(
+  500,
+  ...imported.map((x) => Number(x.index) || 0),
+  ...Object.keys(catObj).map(Number),
+)
 src = src.replace(
   /for \(let i = 123; i <= \d+; i\+\+\) \{\s*\n?\s*if \(categoryByIndex\[i\] == null\) categoryByIndex\[i\] = '[^']+'\s*\n?\}/,
-  `for (let i = 123; i <= 500; i++) {\n  if (categoryByIndex[i] == null) categoryByIndex[i] = 'Pre-Wedding'\n}`,
+  `for (let i = 123; i <= ${maxIdx}; i++) {\n  if (categoryByIndex[i] == null) categoryByIndex[i] = 'Pre-Wedding'\n}`,
 )
 
 fs.writeFileSync(buildPath, src)

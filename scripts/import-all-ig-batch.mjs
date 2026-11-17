@@ -112,8 +112,18 @@ for (const batch of batches) {
   }
 }
 
-fs.writeFileSync(
-  '_media_extract/instagram/all-posts-imported.json',
-  JSON.stringify(imported, null, 2),
-)
-console.log('done', imported.length)
+const importedPath = '_media_extract/instagram/all-posts-imported.json'
+let prev = []
+if (fs.existsSync(importedPath)) {
+  try {
+    prev = JSON.parse(fs.readFileSync(importedPath, 'utf8'))
+    if (!Array.isArray(prev)) prev = []
+  } catch {
+    prev = []
+  }
+}
+const byIndex = new Map(prev.map((x) => [x.index, x]))
+for (const it of imported) byIndex.set(it.index, it)
+const merged = [...byIndex.values()].sort((a, b) => a.index - b.index)
+fs.writeFileSync(importedPath, JSON.stringify(merged, null, 2))
+console.log('done', imported.length, 'merged total', merged.length)
