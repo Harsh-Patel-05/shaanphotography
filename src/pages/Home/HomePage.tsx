@@ -1,27 +1,46 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { Link } from 'react-router-dom'
+import { BlurText } from '../../components/animations/BlurText'
+import { ClipReveal } from '../../components/animations/ClipReveal'
+import { CountUp } from '../../components/animations/CountUp'
+import { Marquee } from '../../components/animations/Marquee'
 import { PageTransition } from '../../components/animations/PageTransition'
 import { ParallaxImage } from '../../components/animations/ParallaxImage'
 import { Reveal } from '../../components/animations/Reveal'
+import { ScrollFloat } from '../../components/animations/ScrollFloat'
+import { ShinyText } from '../../components/animations/ShinyText'
+import { SplitText } from '../../components/animations/SplitText'
+import { SpotlightCard } from '../../components/animations/SpotlightCard'
+import { TiltCard } from '../../components/animations/TiltCard'
 import { Button } from '../../components/common/Button'
+import { CtaBand } from '../../components/common/CtaBand'
 import { HeroVideo } from '../../components/common/HeroVideo'
 import { SEO } from '../../components/common/SEO'
 import { SectionHeading } from '../../components/common/SectionHeading'
 import { VideoPlayer } from '../../components/common/VideoPlayer'
 import { MasonryGrid } from '../../components/gallery/MasonryGrid'
 import { siteConfig } from '../../config/site'
+import { heroVideo, videos } from '../../data/galleryData'
 import {
-  aboutPortrait,
-  cinematicBanner,
   featuredCollections,
-  heroImage,
-  heroVideo,
+  homeAboutImage,
+  homeCinematicImage,
+  homeHeroImage,
+  homeInstagramFeed,
   homeSelectedGallery,
-  instagramFeed,
-  videos,
-} from '../../data/galleryData'
+} from '../../data/mediaMap'
 import { services } from '../../data/servicesData'
 import { testimonials } from '../../data/testimonialsData'
+
+const marqueeItems = [
+  'Weddings',
+  'Pre-Wedding',
+  'Portraits',
+  'Events',
+  'Couples',
+  'Films',
+  'Stories',
+]
 
 export function HomePage() {
   const reduced = useReducedMotion()
@@ -33,56 +52,61 @@ export function HomePage() {
       <section className="relative flex min-h-[100svh] items-end overflow-hidden bg-deep-brown">
         <motion.div
           className="absolute inset-0"
-          initial={reduced ? false : { scale: 1.08, opacity: 0.6 }}
+          initial={reduced ? false : { scale: 1.1, opacity: 0.55 }}
           animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1] }}
         >
           {heroVideo && !reduced ? (
-            <HeroVideo src={heroVideo.src} poster={heroVideo.poster || heroImage} />
+            <HeroVideo src={heroVideo.src} poster={heroVideo.poster || homeHeroImage} />
           ) : (
             <>
               <img
-                src={heroVideo?.poster || heroImage}
+                src={heroVideo?.poster || homeHeroImage}
                 alt="Photography by Shaan"
                 className="h-full w-full object-cover"
                 fetchPriority="high"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-deep-brown via-deep-brown/45 to-deep-brown/25" />
+              <div className="absolute inset-0 bg-gradient-to-t from-deep-brown via-deep-brown/50 to-deep-brown/20" />
             </>
           )}
         </motion.div>
 
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgb(42_31_26/0.48)_100%)]" />
+
         <div className="section-pad container-wide relative z-10 w-full pb-14 pt-28 sm:pb-16 md:pb-24 md:pt-32">
           <motion.p
-            className="mb-3 text-[0.68rem] tracking-[0.28em] text-camel uppercase sm:mb-4 sm:text-[0.72rem] sm:tracking-[0.3em]"
+            className="mb-3 inline-flex items-center gap-3 text-[0.68rem] tracking-[0.3em] text-camel uppercase sm:mb-4 sm:text-[0.72rem]"
             initial={reduced ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.7 }}
           >
+            <span className="h-px w-8 bg-camel/70" aria-hidden />
             {siteConfig.brand.name}
           </motion.p>
-          <motion.h1
-            className="max-w-4xl font-serif text-[clamp(2.25rem,8vw,5.5rem)] leading-[1.05] font-medium text-ivory text-balance"
-            initial={reduced ? false : { opacity: 0, y: 28 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.45, duration: 0.85 }}
-          >
-            {siteConfig.brand.tagline}
-          </motion.h1>
+          <BlurText
+            as="h1"
+            text={siteConfig.brand.tagline}
+            className="max-w-4xl font-serif text-[clamp(2.4rem,8.5vw,5.75rem)] leading-[1.02] font-medium text-ivory text-balance"
+            delay={90}
+            startDelay={0.4}
+            blur={14}
+            stepDuration={0.55}
+            direction="bottom"
+          />
           <motion.p
-            className="mt-4 max-w-xl text-sm text-sand/90 sm:mt-5 sm:text-base md:text-lg"
-            initial={reduced ? false : { opacity: 0, y: 20 }}
+            className="mt-5 max-w-xl text-sm text-sand/90 sm:mt-6 sm:text-base md:text-lg"
+            initial={reduced ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.65, duration: 0.75 }}
+            transition={{ delay: 0.75, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           >
             Weddings, pre-weddings, portraits, events, and couple shoots — photographed with care,
             so they still feel like you years later.
           </motion.p>
           <motion.div
-            className="mt-7 flex flex-wrap gap-3 sm:mt-9 sm:gap-4"
+            className="mt-8 flex flex-wrap gap-3 sm:mt-10 sm:gap-4"
             initial={reduced ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.7 }}
+            transition={{ delay: 0.9, duration: 0.7 }}
           >
             <Button to="/portfolio" variant="light">
               See the Work
@@ -90,12 +114,26 @@ export function HomePage() {
             <Button
               to="/booking"
               variant="secondary"
-              className="border-sand/50 text-ivory hover:bg-ivory/10"
+              className="border-sand/40 text-ivory hover:bg-ivory/10 hover:border-ivory/50"
             >
               Get in Touch
             </Button>
           </motion.div>
         </div>
+      </section>
+
+      <section className="border-y border-sand/60 bg-deep-brown py-4 text-ivory">
+        <Marquee speed="slow">
+          {marqueeItems.map((item) => (
+            <span
+              key={item}
+              className="flex items-center gap-10 text-[0.72rem] tracking-[0.32em] text-sand/80 uppercase"
+            >
+              {item}
+              <span className="h-1 w-1 rounded-full bg-camel/80" />
+            </span>
+          ))}
+        </Marquee>
       </section>
 
       <section className="section-pad container-wide py-16 sm:py-20 md:py-28">
@@ -108,17 +146,23 @@ export function HomePage() {
           {featuredCollections.map((col, i) => (
             <Reveal key={col.id} delay={i * 0.06}>
               <Link to={col.path} className="group block">
-                <div className="overflow-hidden">
-                  <img
-                    src={col.image}
-                    alt={col.title}
-                    loading="lazy"
-                    className="aspect-[3/4] w-full object-cover transition duration-700 group-hover:scale-105"
-                  />
+                <TiltCard className="film-frame overflow-hidden" rotateAmplitude={6} scaleOnHover={1.015}>
+                  <ClipReveal delay={i * 0.04}>
+                    <img
+                      src={col.image}
+                      alt={col.title}
+                      loading="lazy"
+                      className="aspect-[3/4] w-full object-cover transition duration-700 group-hover:scale-105"
+                    />
+                  </ClipReveal>
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-deep-brown/55 via-transparent to-transparent opacity-0 transition duration-500 group-hover:opacity-100" />
+                </TiltCard>
+                <div className="mt-3 flex items-baseline justify-between gap-2 sm:mt-4">
+                  <p className="font-serif text-lg text-deep-brown sm:text-2xl">{col.title}</p>
+                  <span className="text-[0.6rem] tracking-[0.2em] text-soft-gray/70 uppercase">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
                 </div>
-                <p className="mt-3 font-serif text-lg text-deep-brown sm:mt-4 sm:text-2xl">
-                  {col.title}
-                </p>
                 <p className="text-xs text-soft-gray sm:text-sm">{col.subtitle}</p>
               </Link>
             </Reveal>
@@ -126,27 +170,52 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="bg-warm-white">
+      <section className="surface-mist">
         <div className="section-pad container-wide grid items-center gap-8 py-16 sm:gap-10 sm:py-20 md:grid-cols-2 md:gap-16 md:py-28">
-          <Reveal>
-            <div className="overflow-hidden">
+          <ClipReveal>
+            <div className="film-frame overflow-hidden">
               <img
-                src={aboutPortrait}
+                src={homeAboutImage}
                 alt="Photography by Shaan"
                 className="aspect-[4/5] w-full object-cover"
                 loading="lazy"
               />
             </div>
-          </Reveal>
+          </ClipReveal>
           <Reveal delay={0.1}>
-            <p className="text-[0.7rem] tracking-[0.28em] text-desert uppercase">About Shaan</p>
-            <h2 className="mt-3 font-serif text-[clamp(1.85rem,4vw,3rem)] text-deep-brown">
-              I look for the feeling, not the pose
-            </h2>
-            <p className="mt-5 text-soft-gray leading-relaxed">
-              The best photos don’t feel staged. They’re the glance across a room, the laugh you
-              didn’t plan, the quiet second before everything starts. That’s what I try to keep.
+            <p className="inline-flex items-center gap-3 text-[0.7rem] tracking-[0.28em] text-desert uppercase">
+              <span className="h-px w-6 bg-desert/60" aria-hidden />
+              About Shaan
             </p>
+            <BlurText
+              as="h2"
+              text="I’m usually watching the in-between"
+              className="mt-3 font-serif text-[clamp(1.85rem,4vw,3rem)] text-deep-brown"
+              delay={70}
+              blur={10}
+            />
+            <SplitText
+              text="A glance across a room. A laugh nobody planned. The second before everyone lines up. That’s the part I try not to miss."
+              className="mt-5 text-soft-gray leading-relaxed"
+              delay={0.08}
+              stagger={0.028}
+            />
+            <div className="mt-8 grid grid-cols-3 gap-4 border-t border-sand/80 pt-8">
+              {[
+                { to: 120, suffix: '+', label: 'Sessions' },
+                { to: 40, suffix: '+', label: 'Weddings' },
+                { to: 8, suffix: '', label: 'Years' },
+              ].map((stat) => (
+                <div key={stat.label}>
+                  <p className="font-serif text-3xl text-deep-brown sm:text-4xl">
+                    <CountUp to={stat.to} suffix={stat.suffix} />
+                  </p>
+                  <p className="mt-1 text-[0.62rem] tracking-[0.2em] text-soft-gray uppercase">
+                    {stat.label}
+                  </p>
+                </div>
+              ))}
+            </div>
             <div className="mt-8">
               <Button to="/about" variant="secondary">
                 More About Me
@@ -166,17 +235,22 @@ export function HomePage() {
           {services.map((service, i) => (
             <Reveal key={service.id} delay={i * 0.05}>
               <Link to={service.path} className="group block h-full">
-                <div className="overflow-hidden">
-                  <img
-                    src={service.image}
-                    alt={service.title}
-                    loading="lazy"
-                    className="aspect-[16/10] w-full object-cover transition duration-700 group-hover:scale-[1.03]"
-                  />
+                <TiltCard className="film-frame overflow-hidden" rotateAmplitude={5} scaleOnHover={1.01}>
+                  <ClipReveal delay={i * 0.03} direction="up">
+                    <img
+                      src={service.image}
+                      alt={service.title}
+                      loading="lazy"
+                      className="aspect-[16/10] w-full object-cover transition duration-700 group-hover:scale-[1.03]"
+                    />
+                  </ClipReveal>
+                </TiltCard>
+                <div className="mt-4 flex items-start justify-between gap-3">
+                  <h3 className="font-serif text-xl text-deep-brown sm:text-2xl">{service.title}</h3>
+                  <span className="mt-2 text-[0.62rem] tracking-[0.18em] text-soft-gray/60 transition group-hover:text-camel">
+                    →
+                  </span>
                 </div>
-                <h3 className="mt-4 font-serif text-xl text-deep-brown sm:text-2xl">
-                  {service.title}
-                </h3>
                 <p className="mt-2 line-clamp-2 text-sm text-soft-gray">{service.description}</p>
               </Link>
             </Reveal>
@@ -189,22 +263,24 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="section-pad container-wide py-10 md:py-16">
-        <SectionHeading
-          eyebrow="Portfolio"
-          title="A few favorites"
-          description="Tap any photo to view it larger."
-        />
-        <div className="mt-10 sm:mt-12">
-          <MasonryGrid images={homeSelectedGallery} />
-        </div>
-        <div className="mt-10 flex justify-center sm:mt-12">
-          <Button to="/portfolio">Full Portfolio</Button>
+      <section className="surface-stone py-16 sm:py-20 md:py-24">
+        <div className="section-pad container-wide">
+          <SectionHeading
+            eyebrow="Portfolio"
+            title="A few favorites"
+            description="Tap any photo to view it larger."
+          />
+          <div className="mt-10 sm:mt-12">
+            <MasonryGrid images={homeSelectedGallery} />
+          </div>
+          <div className="mt-10 flex justify-center sm:mt-12">
+            <Button to="/portfolio">Full Portfolio</Button>
+          </div>
         </div>
       </section>
 
       {videos.length > 0 ? (
-        <section className="bg-deep-brown py-16 sm:py-20 md:py-28">
+        <section className="surface-ink py-16 sm:py-20 md:py-28">
           <div className="section-pad container-wide">
             <SectionHeading
               light
@@ -223,20 +299,25 @@ export function HomePage() {
         </section>
       ) : null}
 
-      <section className="relative mt-8 h-[50vh] min-h-[320px] sm:mt-10 sm:h-[60vh] sm:min-h-[420px] md:h-[75vh]">
-        <ParallaxImage
-          src={cinematicBanner}
-          alt="Couple photograph"
-          className="absolute inset-0 h-full"
-          imgClassName="object-center"
-        />
-        <div className="absolute inset-0 bg-deep-brown/35" />
+      <section className="relative h-[50vh] min-h-[320px] overflow-hidden sm:h-[60vh] sm:min-h-[420px] md:h-[75vh]">
+        <ScrollFloat distance={40} className="absolute inset-0 h-[120%] -top-[10%]">
+          <ParallaxImage
+            src={homeCinematicImage}
+            alt="Couple photograph"
+            className="absolute inset-0 h-full"
+            imgClassName="object-center"
+          />
+        </ScrollFloat>
+        <div className="absolute inset-0 bg-gradient-to-t from-deep-brown/70 via-deep-brown/30 to-deep-brown/15" />
         <div className="section-pad relative z-10 flex h-full items-end pb-10 sm:pb-14">
-          <Reveal>
-            <p className="max-w-2xl font-serif text-[clamp(1.5rem,4vw,3.2rem)] text-ivory italic">
-              Light, memory, and the spaces between.
-            </p>
-          </Reveal>
+          <BlurText
+            as="p"
+            text="Light, memory, and the spaces between."
+            className="max-w-2xl font-serif text-[clamp(1.6rem,4.2vw,3.4rem)] text-ivory italic"
+            delay={70}
+            blur={12}
+            animateBy="words"
+          />
         </div>
       </section>
 
@@ -245,21 +326,29 @@ export function HomePage() {
         <div className="mt-10 grid gap-8 sm:mt-14 md:grid-cols-2">
           {testimonials.map((item, i) => (
             <Reveal key={item.id} delay={i * 0.06}>
-              <blockquote className="border-t border-sand pt-6 sm:pt-8">
-                <p className="font-serif text-lg leading-relaxed text-chocolate italic sm:text-xl md:text-2xl">
-                  “{item.quote}”
-                </p>
-                <footer className="mt-5 sm:mt-6">
-                  <p className="text-sm tracking-[0.12em] text-deep-brown uppercase">{item.name}</p>
-                  <p className="mt-1 text-xs text-soft-gray">{item.detail}</p>
-                </footer>
-              </blockquote>
+              <SpotlightCard className="group relative border-t border-sand pt-6 sm:pt-8">
+                <blockquote>
+                  <span
+                    aria-hidden
+                    className="absolute top-4 right-0 font-serif text-5xl text-camel/25 transition duration-500 group-hover:text-camel/40 sm:text-6xl"
+                  >
+                    ”
+                  </span>
+                  <p className="font-serif text-lg leading-relaxed text-chocolate italic sm:text-xl md:text-2xl">
+                    “{item.quote}”
+                  </p>
+                  <footer className="mt-5 sm:mt-6">
+                    <p className="text-sm tracking-[0.14em] text-deep-brown uppercase">{item.name}</p>
+                    <p className="mt-1 text-xs text-soft-gray">{item.detail}</p>
+                  </footer>
+                </blockquote>
+              </SpotlightCard>
             </Reveal>
           ))}
         </div>
       </section>
 
-      <section className="bg-sand/30 py-16 sm:py-20 md:py-24">
+      <section className="surface-mist overflow-hidden py-16 sm:py-20 md:py-24">
         <div className="section-pad container-wide">
           <SectionHeading
             eyebrow="Instagram"
@@ -267,13 +356,13 @@ export function HomePage() {
             description={siteConfig.social.instagramHandle}
           />
           <div className="mt-10 grid grid-cols-2 gap-2 sm:mt-12 sm:gap-3 md:grid-cols-3 md:gap-4">
-            {instagramFeed.map((img, i) => (
+            {homeInstagramFeed.map((img, i) => (
               <Reveal key={img.id} delay={i * 0.04}>
                 <a
                   href={siteConfig.social.instagram}
                   target="_blank"
                   rel="noreferrer"
-                  className="group block overflow-hidden"
+                  className="group film-frame relative block overflow-hidden"
                 >
                   <img
                     src={img.src}
@@ -281,6 +370,7 @@ export function HomePage() {
                     loading="lazy"
                     className="aspect-square w-full object-cover transition duration-700 group-hover:scale-105"
                   />
+                  <div className="pointer-events-none absolute inset-0 bg-deep-brown/0 transition duration-500 group-hover:bg-deep-brown/25" />
                 </a>
               </Reveal>
             ))}
@@ -288,26 +378,16 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="section-pad container-wide py-16 sm:py-20 md:py-28">
-        <div className="mx-auto max-w-3xl text-center">
-          <Reveal>
-            <p className="text-[0.7rem] tracking-[0.28em] text-desert uppercase">Let’s talk</p>
-            <h2 className="mt-4 font-serif text-[clamp(2rem,5vw,3.75rem)] text-deep-brown text-balance">
-              Ready when you are
-            </h2>
-            <p className="mx-auto mt-5 max-w-xl text-soft-gray">
-              Tell me a little about your wedding, shoot, or celebration — I’ll get back to you
-              soon.
-            </p>
-            <div className="mt-8 flex flex-wrap justify-center gap-3 sm:mt-9 sm:gap-4">
-              <Button to="/booking">Book a Session</Button>
-              <Button to="/contact" variant="secondary">
-                Contact
-              </Button>
-            </div>
-          </Reveal>
-        </div>
-      </section>
+      <CtaBand
+        title="Ready when you are"
+        description="Tell me a little about your wedding, shoot, or celebration — I’ll get back to you soon."
+        primary={{ to: '/booking', label: 'Book a Session' }}
+        secondary={{ to: '/contact', label: 'Contact' }}
+      >
+        <p className="mb-4 text-[0.7rem] tracking-[0.28em] uppercase">
+          <ShinyText className="tracking-[0.28em]">Let’s talk</ShinyText>
+        </p>
+      </CtaBand>
     </PageTransition>
   )
 }

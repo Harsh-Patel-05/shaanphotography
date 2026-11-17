@@ -1,28 +1,30 @@
+import { ClipReveal } from '../../components/animations/ClipReveal'
 import { PageTransition } from '../../components/animations/PageTransition'
 import { Reveal } from '../../components/animations/Reveal'
-import { Button } from '../../components/common/Button'
+import { CtaBand } from '../../components/common/CtaBand'
+import { PageHero } from '../../components/common/PageHero'
 import { SEO } from '../../components/common/SEO'
 import { SectionHeading } from '../../components/common/SectionHeading'
 import { MasonryGrid } from '../../components/gallery/MasonryGrid'
-import { getImagesByCategory } from '../../data/galleryData'
+import { getUniqueCategoryImages, img, mediaIds } from '../../data/mediaMap'
+
+const stories = [
+  {
+    title: 'A proposal by the water',
+    detail: 'Private proposal',
+    text: 'The setup, the nerves, the yes — kept gently, without getting in the way.',
+  },
+  {
+    title: 'A celebration evening',
+    detail: 'Event coverage',
+    text: 'Decor, guests, and the mood of the night in one place.',
+  },
+]
 
 export function EventsPage() {
-  const images = getImagesByCategory('Events')
-
-  const stories = [
-    {
-      title: 'A proposal by the water',
-      detail: 'Private proposal',
-      image: images[0]?.src,
-      text: 'The setup, the nerves, the yes — kept gently, without getting in the way.',
-    },
-    {
-      title: 'A celebration evening',
-      detail: 'Event coverage',
-      image: images[1]?.src ?? images[0]?.src,
-      text: 'Decor, guests, and the mood of the night in one place.',
-    },
-  ]
+  const featureIds = [...mediaIds.events.stories]
+  const images = getUniqueCategoryImages('Events', featureIds)
+  const storyImages = mediaIds.events.stories.map((id) => img(id, 'Events'))
 
   return (
     <PageTransition>
@@ -32,39 +34,40 @@ export function EventsPage() {
         path="/events"
       />
 
-      <section className="section-pad container-wide pt-24 pb-12 sm:pt-28 sm:pb-14 md:pt-36">
-        <Reveal>
-          <p className="text-[0.7rem] tracking-[0.28em] text-desert uppercase">Events</p>
-          <h1 className="mt-3 max-w-3xl font-serif text-[clamp(2.25rem,6vw,4.5rem)] text-deep-brown">
-            Celebrations, kept with care
-          </h1>
-          <p className="mt-4 max-w-xl text-soft-gray sm:mt-5">
-            Proposals, parties, and private gatherings — covered so you can stay present while the
-            night gets remembered.
-          </p>
-        </Reveal>
-      </section>
+      <PageHero
+        eyebrow="Events"
+        title="Celebrations, kept with care"
+        description="Proposals, parties, and private gatherings — covered so you can stay present while the night gets remembered."
+      />
 
       <section className="section-pad container-wide pb-16 sm:pb-20">
-        <SectionHeading eyebrow="Gallery" title="Event gallery" />
+        <SectionHeading
+          eyebrow="Gallery"
+          title="Event gallery"
+          description="Tap a frame to view it full screen."
+        />
         <div className="mt-10 sm:mt-12">
-          <MasonryGrid images={images} />
+          <MasonryGrid images={images} pageSize={9} />
         </div>
       </section>
 
-      <section className="bg-warm-white py-16 sm:py-20 md:py-28">
+      <section className="surface-mist py-16 sm:py-20 md:py-28">
         <div className="section-pad container-wide">
           <SectionHeading eyebrow="Featured" title="A couple of stories" />
           <div className="mt-10 grid gap-8 sm:mt-12 sm:gap-10 md:grid-cols-2">
             {stories.map((story, i) => (
               <Reveal key={story.title} delay={i * 0.06}>
-                <article>
-                  <img
-                    src={story.image}
-                    alt={story.title}
-                    className="aspect-[16/10] w-full object-cover"
-                    loading="lazy"
-                  />
+                <article className="group">
+                  <ClipReveal delay={i * 0.04}>
+                    <div className="film-frame overflow-hidden">
+                      <img
+                        src={storyImages[i]?.src}
+                        alt={story.title}
+                        className="aspect-[16/10] w-full object-cover transition duration-700 group-hover:scale-[1.03]"
+                        loading="lazy"
+                      />
+                    </div>
+                  </ClipReveal>
                   <p className="mt-3 text-[0.65rem] tracking-[0.2em] text-camel uppercase sm:mt-4">
                     {story.detail}
                   </p>
@@ -79,16 +82,13 @@ export function EventsPage() {
         </div>
       </section>
 
-      <section className="section-pad container-wide py-16 text-center sm:py-20">
-        <Reveal>
-          <h2 className="font-serif text-2xl text-deep-brown sm:text-3xl md:text-4xl">
-            Hosting something special?
-          </h2>
-          <div className="mt-8">
-            <Button to="/booking">Request Coverage</Button>
-          </div>
-        </Reveal>
-      </section>
+      <CtaBand
+        title="Hosting something special?"
+        description="Share the date and what kind of night it is — I’ll tell you how I’d cover it."
+        primary={{ to: '/booking', label: 'Request Coverage' }}
+        secondary={{ to: '/contact', label: 'Contact' }}
+        tone="stone"
+      />
     </PageTransition>
   )
 }

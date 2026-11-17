@@ -1,6 +1,5 @@
-import { AnimatePresence } from 'framer-motion'
 import { lazy, Suspense } from 'react'
-import { Route, Routes, useLocation } from 'react-router-dom'
+import { Link, Route, Routes } from 'react-router-dom'
 import { ScrollToTop } from './components/common/ScrollToTop'
 import { MainLayout } from './components/layout/MainLayout'
 import { PageLoader } from './components/layout/PageLoader'
@@ -47,51 +46,44 @@ function RouteFallback() {
   )
 }
 
-export default function App() {
-  const location = useLocation()
+function NotFoundPage() {
+  return (
+    <div className="section-pad container-wide py-40 text-center">
+      <h1 className="font-serif text-4xl text-deep-brown">Page not found</h1>
+      <p className="mt-4 text-soft-gray">The page you are looking for does not exist.</p>
+      <Link
+        to="/"
+        className="mt-8 inline-block text-sm tracking-[0.16em] text-chocolate uppercase"
+      >
+        Return home
+      </Link>
+    </div>
+  )
+}
 
+export default function App() {
   return (
     <>
       <PageLoader />
       <ScrollToTop />
-      <AnimatePresence mode="wait">
-        <Suspense fallback={<RouteFallback />}>
-          <Routes location={location} key={location.pathname}>
-            <Route element={<MainLayout />}>
-              <Route index element={<HomePage />} />
-              <Route path="about" element={<AboutPage />} />
-              <Route path="portfolio" element={<PortfolioPage />} />
-              <Route path="wedding" element={<WeddingPage />} />
-              <Route path="pre-wedding" element={<PreWeddingPage />} />
-              <Route path="portrait" element={<PortraitPage />} />
-              <Route path="events" element={<EventsPage />} />
-              <Route path="couple" element={<CouplePage />} />
-              <Route path="services" element={<ServicesPage />} />
-              <Route path="contact" element={<ContactPage />} />
-              <Route path="booking" element={<BookingPage />} />
-              <Route
-                path="*"
-                element={
-                  <div className="section-pad container-wide py-40 text-center">
-                    <h1 className="font-serif text-4xl text-deep-brown">Page not found</h1>
-                    <p className="mt-4 text-soft-gray">The page you are looking for does not exist.</p>
-                    <a
-                      href={import.meta.env.BASE_URL}
-                      onClick={(e) => {
-                        e.preventDefault()
-                        window.location.assign(import.meta.env.BASE_URL)
-                      }}
-                      className="mt-8 inline-block text-sm tracking-[0.16em] text-chocolate uppercase"
-                    >
-                      Return home
-                    </a>
-                  </div>
-                }
-              />
-            </Route>
-          </Routes>
-        </Suspense>
-      </AnimatePresence>
+      <Suspense fallback={<RouteFallback />}>
+        <Routes>
+          <Route element={<MainLayout />}>
+            <Route index element={<HomePage />} />
+            <Route path="about" element={<AboutPage />} />
+            <Route path="portfolio" element={<PortfolioPage />} />
+            <Route path="wedding" element={<WeddingPage />} />
+            <Route path="pre-wedding" element={<PreWeddingPage />} />
+            <Route path="portrait" element={<PortraitPage />} />
+            <Route path="events" element={<EventsPage />} />
+            <Route path="couple" element={<CouplePage />} />
+            <Route path="services" element={<ServicesPage />} />
+            <Route path="contact" element={<ContactPage />} />
+            <Route path="booking" element={<BookingPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Route>
+        </Routes>
+      </Suspense>
     </>
   )
 }

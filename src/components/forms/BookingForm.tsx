@@ -66,8 +66,8 @@ export function BookingForm() {
 
   if (success) {
     return (
-      <div className="border border-sand bg-warm-white p-8 sm:p-10">
-        <p className="text-[0.7rem] tracking-[0.22em] text-desert uppercase">Booking</p>
+      <div className="py-2 sm:py-4">
+        <p className="text-[0.7rem] tracking-[0.22em] text-desert uppercase">Almost booked</p>
         <h3 className="mt-3 font-serif text-3xl text-deep-brown">
           Got it, {values.fullName}.
         </h3>
@@ -75,6 +75,20 @@ export function BookingForm() {
           Your details are ready here. Jump to WhatsApp or email next so we can talk dates and
           finalize everything.
         </p>
+        <dl className="mt-6 grid gap-3 border-t border-sand/80 pt-5 text-sm sm:grid-cols-2">
+          <div>
+            <dt className="text-[0.62rem] tracking-[0.16em] text-soft-gray uppercase">Type</dt>
+            <dd className="mt-1 text-deep-brown">{values.photographyType}</dd>
+          </div>
+          <div>
+            <dt className="text-[0.62rem] tracking-[0.16em] text-soft-gray uppercase">Date</dt>
+            <dd className="mt-1 text-deep-brown">{values.eventDate}</dd>
+          </div>
+          <div className="sm:col-span-2">
+            <dt className="text-[0.62rem] tracking-[0.16em] text-soft-gray uppercase">Location</dt>
+            <dd className="mt-1 text-deep-brown">{values.eventLocation}</dd>
+          </div>
+        </dl>
         <div className="mt-8 flex flex-wrap gap-3">
           <Button
             href={getWhatsAppLink(
@@ -94,7 +108,13 @@ export function BookingForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} noValidate className="space-y-5 border border-sand bg-warm-white p-6 sm:p-8 md:p-10">
+    <form onSubmit={onSubmit} noValidate className="space-y-5">
+      <div className="mb-2 border-b border-sand/80 pb-5">
+        <p className="text-[0.68rem] tracking-[0.2em] text-desert uppercase">Inquiry form</p>
+        <p className="mt-2 text-sm text-soft-gray">
+          Required fields help me reply with a useful quote — budget is optional.
+        </p>
+      </div>
       <div className="grid gap-5 md:grid-cols-2">
         <TextInput
           id="booking-name"

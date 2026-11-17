@@ -32,7 +32,7 @@ export function FieldShell({
 }
 
 const controlClass =
-  'w-full border border-sand bg-warm-white px-4 py-3 text-sm text-deep-brown outline-none transition placeholder:text-soft-gray/60 focus:border-camel'
+  'w-full border border-sand/80 bg-warm-white/80 px-4 py-3.5 text-sm text-deep-brown outline-none transition duration-300 placeholder:text-soft-gray/55 hover:border-camel/50 focus:border-camel focus:bg-warm-white focus:shadow-[0_0_0_4px_rgb(184_160_120/0.15)]'
 
 export function TextInput({
   label,

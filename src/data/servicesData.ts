@@ -1,7 +1,4 @@
-import { galleryImages } from './galleryData'
-
-const byCategory = (category: string) =>
-  galleryImages.find((i) => i.category === category)?.src ?? galleryImages[0]?.src ?? ''
+import { img, mediaIds } from './mediaMap'
 
 export type ServiceItem = {
   id: string
@@ -19,15 +16,15 @@ export const services: ServiceItem[] = [
     title: 'Wedding Photography',
     slug: 'wedding',
     description:
-      'Your wedding day, told as it unfolds — the quiet prep, the vows, the dance floor, and all the little in-between moments.',
+      'I stay with your day from quiet prep to the last song — candid when it counts, guided only when you need it.',
     includes: [
       'Full-day or multi-day coverage',
       'Candid and guided portraits',
       'Ceremony and reception coverage',
-      'Online gallery of your selects',
-      'Highlight image set',
+      'Private online gallery',
+      'Curated highlight set',
     ],
-    image: byCategory('Wedding'),
+    image: img(mediaIds.services.wedding, 'Wedding').src,
     path: '/wedding',
   },
   {
@@ -35,15 +32,15 @@ export const services: ServiceItem[] = [
     title: 'Pre-Wedding Photography',
     slug: 'pre-wedding',
     description:
-      'A relaxed shoot before the big day — good light, easy posing, and photos that feel like the two of you.',
+      'A few unhurried hours together before the wedding — good light, easy prompts, photos that still feel like you.',
     includes: [
       'Location ideas and planning',
       'Gentle posing guidance',
-      'Golden-hour or destination options',
-      'Full story set of images',
+      'Golden-hour or short-trip options',
+      'Full edited story set',
       'Print-ready files',
     ],
-    image: byCategory('Pre-Wedding'),
+    image: img(mediaIds.services.preWedding, 'Pre-Wedding').src,
     path: '/pre-wedding',
   },
   {
@@ -51,15 +48,15 @@ export const services: ServiceItem[] = [
     title: 'Portrait Photography',
     slug: 'portrait',
     description:
-      'Simple, flattering portraits for you or your family — soft light, natural expressions, nothing forced.',
+      'Calm sessions for you or your family — flattering light, simple direction, no stiff studio energy.',
     includes: [
-      'Studio or outdoor session',
-      'Wardrobe suggestions',
-      'Easy, directed posing',
+      'Outdoor or soft indoor light',
+      'Wardrobe notes if you want them',
+      'Easy, natural posing',
       'Retouched selects',
       'Private gallery delivery',
     ],
-    image: byCategory('Portrait'),
+    image: img(mediaIds.services.portrait, 'Portrait').src,
     path: '/portrait',
   },
   {
@@ -67,15 +64,15 @@ export const services: ServiceItem[] = [
     title: 'Event Photography',
     slug: 'events',
     description:
-      'Proposals, celebrations, and gatherings covered with a light touch — so people stay present while the moments get saved.',
+      'Proposals, parties, and private gatherings — covered lightly so guests stay present while the night is saved.',
     includes: [
-      'Timeline planning together',
+      'Simple timeline planning',
       'Candid guest coverage',
       'Key moments documented',
       'Same-day selects on request',
       'Full event gallery',
     ],
-    image: byCategory('Events'),
+    image: img(mediaIds.services.events, 'Events').src,
     path: '/events',
   },
   {
@@ -83,15 +80,15 @@ export const services: ServiceItem[] = [
     title: 'Couple Photography',
     slug: 'couple',
     description:
-      'Just the two of you — walks, laughs, quiet frames. A session that feels easy and looks beautiful.',
+      'An easy date with a camera nearby — walks, laughs, and quiet frames of the two of you.',
     includes: [
       'Location planning',
       'Natural posing help',
-      'City, beach, or golden-hour options',
+      'City, water, or golden-hour options',
       'Story set of images',
       'Private gallery delivery',
     ],
-    image: byCategory('Couple Photography'),
+    image: img(mediaIds.services.couple, 'Couple Photography').src,
     path: '/couple',
   },
 ]

@@ -1,24 +1,47 @@
 import { Link } from 'react-router-dom'
-import { getMailtoLink, getWhatsAppLink, siteConfig } from '../../config/site'
+import {
+  getMailtoLink,
+  getMapsSearchUrl,
+  getWhatsAppLink,
+  siteConfig,
+} from '../../config/site'
 import { footerNavLinks } from '../../data/navigationData'
+import { Reveal } from '../animations/Reveal'
+import { SplitText } from '../animations/SplitText'
 import { Logo } from '../common/Logo'
+import { SocialIcons } from '../common/SocialIcons'
+
+const YEAR = new Date().getFullYear()
 
 export function Footer() {
-  const year = new Date().getFullYear()
+  const address = siteConfig.contact.address
 
   return (
-    <footer className="border-t border-sand bg-deep-brown text-ivory">
-      <div className="section-pad container-wide py-16 md:py-20">
-        <div className="grid gap-12 md:grid-cols-[1.2fr_1fr_1fr]">
-          <div>
+    <footer className="surface-ink relative overflow-hidden text-ivory">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-camel/50 to-transparent" />
+
+      <div className="section-pad container-wide py-16 md:py-24">
+        <Reveal>
+          <SplitText
+            text="Let’s make something you’ll still love looking at years from now."
+            as="p"
+            className="max-w-3xl font-serif text-[clamp(1.75rem,4vw,3.25rem)] leading-[1.15] text-ivory/95 text-balance"
+            delay={0.05}
+            stagger={0.04}
+          />
+        </Reveal>
+
+        <div className="mt-12 grid gap-12 border-t border-chocolate/70 pt-12 md:mt-16 md:grid-cols-2 md:gap-14 md:pt-16 lg:grid-cols-4">
+          <div className="lg:col-span-1">
             <Logo variant="dark" className="mb-5" />
-            <p className="max-w-sm text-sm leading-relaxed text-sand/90">
+            <p className="max-w-sm text-sm leading-relaxed text-sand/85">
               {siteConfig.brand.description}
             </p>
+            <SocialIcons tone="light" className="mt-6" />
           </div>
 
           <div>
-            <p className="mb-4 text-[0.7rem] tracking-[0.24em] text-camel uppercase">
+            <p className="mb-4 text-[0.68rem] tracking-[0.26em] text-camel uppercase">
               Explore
             </p>
             <ul className="space-y-3">
@@ -26,7 +49,7 @@ export function Footer() {
                 <li key={link.path}>
                   <Link
                     to={link.path}
-                    className="text-sm text-ivory/80 transition hover:text-ivory"
+                    className="nav-link inline-block text-sm text-ivory/75 transition hover:text-ivory"
                   >
                     {link.label}
                   </Link>
@@ -36,10 +59,10 @@ export function Footer() {
           </div>
 
           <div>
-            <p className="mb-4 text-[0.7rem] tracking-[0.24em] text-camel uppercase">
-              Connect
+            <p className="mb-4 text-[0.68rem] tracking-[0.26em] text-camel uppercase">
+              Contact
             </p>
-            <ul className="space-y-3 text-sm text-ivory/80">
+            <ul className="space-y-3 text-sm text-ivory/75">
               <li>
                 <a href={getMailtoLink()} className="transition hover:text-ivory">
                   {siteConfig.contact.email}
@@ -75,15 +98,37 @@ export function Footer() {
               </li>
             </ul>
           </div>
+
+          <div>
+            <p className="mb-4 text-[0.68rem] tracking-[0.26em] text-camel uppercase">
+              Address
+            </p>
+            <address className="not-italic text-sm leading-relaxed text-ivory/75">
+              <p className="text-ivory/90">{address.line1}</p>
+              <p className="mt-1">
+                {address.line2}
+                <br />
+                {address.city}, {address.state} {address.postal}
+                <br />
+                {address.country}
+              </p>
+            </address>
+            <a
+              href={getMapsSearchUrl()}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-4 inline-block text-[0.65rem] tracking-[0.16em] text-camel uppercase transition hover:text-ivory"
+            >
+              View on map →
+            </a>
+          </div>
         </div>
 
-        <hr className="my-10 border-0 border-t border-chocolate/60" />
-
-        <div className="flex flex-col gap-3 text-xs tracking-wide text-soft-gray sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-12 flex flex-col gap-3 border-t border-chocolate/70 pt-8 text-xs tracking-wide text-soft-gray sm:mt-16 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {year} {siteConfig.brand.name}. All rights reserved.
+            © {YEAR} {siteConfig.brand.name}. All rights reserved.
           </p>
-          <p className="font-serif text-sm italic text-sand/70">
+          <p className="font-serif text-sm italic text-sand/65">
             Made with care and good light
           </p>
         </div>

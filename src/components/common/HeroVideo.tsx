@@ -24,15 +24,26 @@ export function HeroVideo({ src, poster, className = '' }: Props) {
 
   const mediaSrc = src.includes('?') ? `${src}&v=audio` : `${src}?v=audio`
 
-  // Scroll → mount/unmount video
+  // Scroll → mount/unmount video (rAF throttled)
   useEffect(() => {
-    const sync = () => setActive(atHeroTop())
+    let raf = 0
+    const sync = () => {
+      raf = 0
+      setActive((prev) => {
+        const next = atHeroTop()
+        return prev === next ? prev : next
+      })
+    }
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(sync)
+    }
     sync()
-    window.addEventListener('scroll', sync, { passive: true, capture: true })
-    window.addEventListener('resize', sync, { passive: true })
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll, { passive: true })
     return () => {
-      window.removeEventListener('scroll', sync, true)
-      window.removeEventListener('resize', sync)
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+      if (raf) cancelAnimationFrame(raf)
     }
   }, [])
 

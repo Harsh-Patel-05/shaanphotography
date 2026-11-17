@@ -5,6 +5,7 @@ export type NavLink = {
 
 /** Desktop navbar — keep it slim */
 export const mainNavLinks: NavLink[] = [
+  { label: 'Home', path: '/' },
   { label: 'About', path: '/about' },
   { label: 'Portfolio', path: '/portfolio' },
   { label: 'Wedding', path: '/wedding' },
@@ -15,6 +16,7 @@ export const mainNavLinks: NavLink[] = [
 
 /** Full mobile menu — same as a complete site nav */
 export const mobileNavLinks: NavLink[] = [
+  { label: 'Home', path: '/' },
   { label: 'About', path: '/about' },
   { label: 'Portfolio', path: '/portfolio' },
   { label: 'Wedding', path: '/wedding' },
@@ -27,6 +29,7 @@ export const mobileNavLinks: NavLink[] = [
 ]
 
 export const footerNavLinks: NavLink[] = [
+  { label: 'Home', path: '/' },
   { label: 'About', path: '/about' },
   { label: 'Portfolio', path: '/portfolio' },
   { label: 'Wedding', path: '/wedding' },

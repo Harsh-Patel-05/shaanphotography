@@ -222,10 +222,10 @@ export const galleryImages: GalleryImage[] = [
   {
     "id": "p025",
     "src": asset("/media/photos/p025-dsc05335-jpg.jpg"),
-    "alt": "Shaan Photography — Mountain Path",
+    "alt": "Shaan Photography — Pre-Wedding",
     "category": "Pre-Wedding",
     "orientation": "landscape",
-    "title": "Mountain Path"
+    "title": "Pre-Wedding"
   },
   {
     "id": "p026",
@@ -302,10 +302,10 @@ export const galleryImages: GalleryImage[] = [
   {
     "id": "p035",
     "src": asset("/media/photos/p035-dsc05989-jpg.jpg"),
-    "alt": "Shaan Photography — Blue Train",
+    "alt": "Shaan Photography — Pre-Wedding",
     "category": "Pre-Wedding",
     "orientation": "portrait",
-    "title": "Blue Train"
+    "title": "Pre-Wedding"
   },
   {
     "id": "p036",
@@ -342,10 +342,10 @@ export const galleryImages: GalleryImage[] = [
   {
     "id": "p040",
     "src": asset("/media/photos/p040-dsc06964-jpg.jpg"),
-    "alt": "Shaan Photography — Lake Embrace",
+    "alt": "Shaan Photography — Pre-Wedding",
     "category": "Pre-Wedding",
     "orientation": "portrait",
-    "title": "Lake Embrace"
+    "title": "Pre-Wedding"
   },
   {
     "id": "p041",
@@ -406,10 +406,10 @@ export const galleryImages: GalleryImage[] = [
   {
     "id": "p048",
     "src": asset("/media/photos/p048-dsc07938-jpg.jpg"),
-    "alt": "Shaan Photography — Heart Arch",
+    "alt": "Shaan Photography — Pre-Wedding",
     "category": "Pre-Wedding",
     "orientation": "landscape",
-    "title": "Heart Arch"
+    "title": "Pre-Wedding"
   },
   {
     "id": "p049",

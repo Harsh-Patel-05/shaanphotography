@@ -88,10 +88,10 @@ export function Lightbox({ images, index, onClose, onPrev, onNext }: Props) {
           <motion.div
             key={image.id}
             className="relative max-h-[85dvh] w-full max-w-5xl px-10 sm:px-14"
-            initial={{ opacity: 0, scale: 0.97 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, scale: 0.96, y: 12 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.98 }}
-            transition={{ duration: 0.35 }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
             onClick={(e) => e.stopPropagation()}
             onTouchStart={(e) => {
               touchStartX.current = e.changedTouches[0]?.clientX ?? null

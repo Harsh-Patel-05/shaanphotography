@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import type { VideoItem } from '../../data/galleryData'
 
@@ -99,12 +100,17 @@ export function VideoPlayer({ video }: Props) {
   }, [])
 
   return (
-    <article ref={containerRef} className="group">
+    <motion.article
+      ref={containerRef}
+      className="group"
+      whileHover={{ y: -4 }}
+      transition={{ type: 'spring', stiffness: 260, damping: 22 }}
+    >
       <div className="relative aspect-video overflow-hidden bg-chocolate">
         <video
           ref={ref}
           data-film-video={video.id}
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]"
           src={video.src}
           poster={video.poster}
           preload="metadata"
@@ -129,15 +135,19 @@ export function VideoPlayer({ video }: Props) {
             className="absolute inset-0 z-10 flex items-center justify-center bg-deep-brown/25 transition hover:bg-deep-brown/35"
             aria-label={`Play ${video.title}`}
           >
-            <span className="flex h-14 w-14 items-center justify-center rounded-full border border-ivory/70 bg-deep-brown/45 text-ivory backdrop-blur-sm">
+            <motion.span
+              className="flex h-14 w-14 items-center justify-center rounded-full border border-ivory/70 bg-deep-brown/45 text-ivory backdrop-blur-sm"
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.95 }}
+            >
               <svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor" aria-hidden>
                 <path d="M5 3.5v11l10-5.5L5 3.5z" />
               </svg>
-            </span>
+            </motion.span>
           </button>
         ) : null}
       </div>
       <p className="mt-3 font-serif text-xl text-ivory">{video.title}</p>
-    </article>
+    </motion.article>
   )
 }
