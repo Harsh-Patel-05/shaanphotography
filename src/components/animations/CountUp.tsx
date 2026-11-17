@@ -23,7 +23,12 @@ export function CountUp({
   const [value, setValue] = useState(reduced ? to : 0)
 
   useEffect(() => {
-    if (!inView || reduced) {
+    setValue(reduced ? to : 0)
+  }, [to, reduced])
+
+  useEffect(() => {
+    if (!inView) return
+    if (reduced) {
       setValue(to)
       return
     }

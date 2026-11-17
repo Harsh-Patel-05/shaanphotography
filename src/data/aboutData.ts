@@ -57,12 +57,12 @@ export const aboutProcess = [
   },
 ]
 
+/** Shared studio stats — Home + About */
 export const aboutStats = [
-  { to: 120, suffix: '+', label: 'Sessions' },
-  { to: 40, suffix: '+', label: 'Weddings' },
-  { to: 8, suffix: '', label: 'Years' },
-  { to: 15, suffix: '+', label: 'Cities' },
-]
+  { to: 1000, suffix: '+', label: 'Sessions' },
+  { to: 500, suffix: '+', label: 'Weddings' },
+  { to: 21, suffix: '', label: 'Years' },
+] as const
 
 export const aboutFocus = [
   {

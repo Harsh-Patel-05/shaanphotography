@@ -371,12 +371,12 @@ export function AboutPage() {
       {/* Stats */}
       <section className="surface-stone py-14 sm:py-16 md:py-20">
         <div className="section-pad container-wide">
-          <div className="grid grid-cols-2 gap-6 border-y border-camel/25 py-10 sm:grid-cols-4 sm:gap-4 sm:py-12">
+          <div className="grid grid-cols-3 gap-6 border-y border-camel/25 py-10 sm:gap-4 sm:py-12">
             {aboutStats.map((stat, i) => (
-              <Reveal key={stat.label} delay={i * 0.06}>
+              <Reveal key={`${stat.label}-${stat.to}`} delay={i * 0.06}>
                 <div className="text-center">
                   <p className="font-serif text-[clamp(2rem,5.5vw,3.5rem)] leading-none text-deep-brown">
-                    <CountUp to={stat.to} suffix={stat.suffix} />
+                    <CountUp key={stat.to} to={stat.to} suffix={stat.suffix} />
                   </p>
                   <p className="mt-3 text-[0.62rem] tracking-[0.24em] text-soft-gray uppercase">
                     {stat.label}

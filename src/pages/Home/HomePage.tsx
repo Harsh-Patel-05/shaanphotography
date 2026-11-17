@@ -29,6 +29,7 @@ import {
   homeInstagramFeed,
   homeSelectedGallery,
 } from '../../data/mediaMap'
+import { aboutStats } from '../../data/aboutData'
 import { services } from '../../data/servicesData'
 import { testimonials } from '../../data/testimonialsData'
 
@@ -201,14 +202,10 @@ export function HomePage() {
               stagger={0.028}
             />
             <div className="mt-8 grid grid-cols-3 gap-4 border-t border-sand/80 pt-8">
-              {[
-                { to: 120, suffix: '+', label: 'Sessions' },
-                { to: 40, suffix: '+', label: 'Weddings' },
-                { to: 8, suffix: '', label: 'Years' },
-              ].map((stat) => (
-                <div key={stat.label}>
+              {aboutStats.map((stat) => (
+                <div key={`${stat.label}-${stat.to}`}>
                   <p className="font-serif text-3xl text-deep-brown sm:text-4xl">
-                    <CountUp to={stat.to} suffix={stat.suffix} />
+                    <CountUp key={stat.to} to={stat.to} suffix={stat.suffix} />
                   </p>
                   <p className="mt-1 text-[0.62rem] tracking-[0.2em] text-soft-gray uppercase">
                     {stat.label}

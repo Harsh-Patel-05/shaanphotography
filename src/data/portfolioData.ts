@@ -58,5 +58,6 @@ export const categoryIntros: Record<
   Maternity: {
     label: 'Maternity',
     blurb: 'Soft outdoor frames for this season of waiting.',
+    path: '/portfolio',
   },
 }
