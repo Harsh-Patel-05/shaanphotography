@@ -3,6 +3,7 @@ import { Link, Route, Routes } from 'react-router-dom'
 import { ScrollToTop } from './components/common/ScrollToTop'
 import { MainLayout } from './components/layout/MainLayout'
 import { PageLoader } from './components/layout/PageLoader'
+import { IntroProvider } from './context/IntroContext'
 
 const HomePage = lazy(() =>
   import('./pages/Home/HomePage').then((m) => ({ default: m.HomePage })),
@@ -63,7 +64,7 @@ function NotFoundPage() {
 
 export default function App() {
   return (
-    <>
+    <IntroProvider>
       <PageLoader />
       <ScrollToTop />
       <Suspense fallback={<RouteFallback />}>
@@ -84,6 +85,6 @@ export default function App() {
           </Route>
         </Routes>
       </Suspense>
-    </>
+    </IntroProvider>
   )
 }

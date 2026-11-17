@@ -55,4 +55,8 @@ export const categoryIntros: Record<
     blurb: 'Walks, laughs, and quiet frames of modern love.',
     path: '/couple',
   },
+  Maternity: {
+    label: 'Maternity',
+    blurb: 'Soft outdoor frames for this season of waiting.',
+  },
 }

@@ -2,6 +2,7 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { BlurText } from '../../components/animations/BlurText'
+import { Magnet } from '../../components/animations/Magnet'
 import { PageTransition } from '../../components/animations/PageTransition'
 import { Reveal } from '../../components/animations/Reveal'
 import { SplitText } from '../../components/animations/SplitText'
@@ -74,7 +75,8 @@ function FaqItem({
 }
 
 export function WeddingPage() {
-  const images = getUniqueCategoryImages('Wedding', [])
+  const featureIds = [mediaIds.wedding.hero] as const
+  const images = getUniqueCategoryImages('Wedding', featureIds)
   const reduced = useReducedMotion()
   const [openFaq, setOpenFaq] = useState<number | null>(0)
   const heroImg = img(mediaIds.wedding.hero, 'Wedding').src
@@ -141,16 +143,20 @@ export function WeddingPage() {
               {weddingHero.description}
             </p>
             <div className="mt-8 flex flex-wrap gap-3 sm:mt-10 sm:gap-4">
-              <Button to="/booking" variant="light">
-                Request a Quote
-              </Button>
-              <Button
-                to="/portfolio"
-                variant="secondary"
-                className="border-sand/40 text-ivory hover:border-ivory/50 hover:bg-ivory/10"
-              >
-                View Portfolio
-              </Button>
+              <Magnet maxOffset={10} magnetStrength={3.6}>
+                <Button to="/booking" variant="light">
+                  Request a Quote
+                </Button>
+              </Magnet>
+              <Magnet maxOffset={10} magnetStrength={3.6}>
+                <Button
+                  to="/portfolio"
+                  variant="secondary"
+                  className="border-sand/40 text-ivory hover:border-ivory/50 hover:bg-ivory/10"
+                >
+                  View Portfolio
+                </Button>
+              </Magnet>
             </div>
             <p className="mt-6 text-[0.65rem] tracking-[0.18em] text-sand/70 uppercase">
               {images.length} wedding frames · {siteConfig.contact.location}

@@ -103,7 +103,7 @@ export function AboutPage() {
     <PageTransition>
       <SEO
         title="About"
-        description="Meet Shaan — wedding and portrait photographer in Ahmedabad focused on real moments, soft light, and honest storytelling."
+        description="Meet Shaan — wedding and portrait photographer in Kalol focused on real moments, soft light, and honest storytelling."
         path="/about"
       />
 

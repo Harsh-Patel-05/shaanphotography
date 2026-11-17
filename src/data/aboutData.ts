@@ -2,7 +2,7 @@ export const aboutHero = {
   eyebrow: 'About',
   headline: 'I notice the small things first.',
   intro:
-    'I’m Shaan — based in Ahmedabad. I photograph weddings and quieter days with the same aim: keep what it actually felt like, not a stiff version of it.',
+    'I’m Shaan — based in Kalol. I photograph weddings and quieter days with the same aim: keep what it actually felt like, not a stiff version of it.',
 }
 
 export const aboutStory = {
@@ -114,7 +114,7 @@ export const aboutDelivery = [
 export const aboutFaq = [
   {
     q: 'Do you travel for weddings and shoots?',
-    a: 'Yes. I’m based in Ahmedabad and regularly travel across Gujarat and India. Destination fees depend on dates and distance — ask when you inquire.',
+    a: 'Yes. I’m based in Kalol and regularly travel across Gujarat and India. Destination fees depend on dates and distance — ask when you inquire.',
   },
   {
     q: 'How far in advance should we book?',
@@ -141,7 +141,7 @@ export const aboutMarquee = [
   'Events',
   'Couples',
   'Destination',
-  'Ahmedabad',
+  'Kalol',
   'Soft light',
 ]
 

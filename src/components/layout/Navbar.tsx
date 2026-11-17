@@ -183,6 +183,14 @@ export function Navbar() {
                       Instagram
                     </a>
                     <a
+                      href={siteConfig.social.threads}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="transition hover:text-ivory"
+                    >
+                      Threads
+                    </a>
+                    <a
                       href={getWhatsAppLink()}
                       target="_blank"
                       rel="noreferrer"

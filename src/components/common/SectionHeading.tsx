@@ -1,5 +1,6 @@
 import { BlurText } from '../animations/BlurText'
 import { Reveal } from '../animations/Reveal'
+import { SplitText } from '../animations/SplitText'
 
 type Props = {
   eyebrow?: string
@@ -51,9 +52,12 @@ export function SectionHeading({
         direction="bottom"
       />
       {description ? (
-        <p className={`mt-4 text-sm leading-relaxed sm:mt-5 sm:text-[0.95rem] ${muted}`}>
-          {description}
-        </p>
+        <SplitText
+          text={description}
+          className={`mt-4 text-sm leading-relaxed sm:mt-5 sm:text-[0.95rem] ${muted}`}
+          delay={0.12}
+          stagger={0.018}
+        />
       ) : null}
     </Reveal>
   )

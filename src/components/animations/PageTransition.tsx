@@ -5,7 +5,7 @@ type Props = {
   children: ReactNode
 }
 
-/** Lightweight enter transition — no blur (blur was causing page lag). */
+/** Soft page enter — MotionSites fade + lift, no heavy blur. */
 export function PageTransition({ children }: Props) {
   const reduced = useReducedMotion()
 
@@ -15,9 +15,9 @@ export function PageTransition({ children }: Props) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+      initial={{ opacity: 0, y: 18, scale: 0.992 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
     >
       {children}
     </motion.div>

@@ -1,12 +1,30 @@
 import { ClipReveal } from '../../components/animations/ClipReveal'
 import { PageTransition } from '../../components/animations/PageTransition'
 import { Reveal } from '../../components/animations/Reveal'
+import { SpotlightCard } from '../../components/animations/SpotlightCard'
+import { Stagger, StaggerItem } from '../../components/animations/Stagger'
+import { TiltCard } from '../../components/animations/TiltCard'
 import { CtaBand } from '../../components/common/CtaBand'
 import { PageHero } from '../../components/common/PageHero'
 import { SEO } from '../../components/common/SEO'
 import { SectionHeading } from '../../components/common/SectionHeading'
 import { MasonryGrid } from '../../components/gallery/MasonryGrid'
 import { getUniqueCategoryImages, img, mediaIds } from '../../data/mediaMap'
+
+const approach = [
+  {
+    title: 'Soft direction',
+    text: 'A little guidance so you settle in — never stiff posing.',
+  },
+  {
+    title: 'Flattering light',
+    text: 'Outdoor glow or quiet indoors — whichever suits you.',
+  },
+  {
+    title: 'Frames that feel true',
+    text: 'Photos you’ll actually like looking at later.',
+  },
+]
 
 export function PortraitPage() {
   const featureIds = [mediaIds.portrait.lead, mediaIds.portrait.side]
@@ -18,7 +36,7 @@ export function PortraitPage() {
     <PageTransition>
       <SEO
         title="Portrait Photography"
-        description="Portrait sessions with Shaan in Ahmedabad — calm direction, flattering light, and photos you’ll actually like."
+        description="Portrait sessions with Shaan in Kalol — calm direction, flattering light, and photos you’ll actually like."
         path="/portrait"
       />
 
@@ -32,27 +50,56 @@ export function PortraitPage() {
       <section className="section-pad container-wide pb-10">
         <div className="grid gap-3 sm:gap-4 md:grid-cols-12 md:gap-5">
           <Reveal className="md:col-span-7">
-            <ClipReveal>
-              <div className="film-frame overflow-hidden">
-                <img
-                  src={lead.src}
-                  alt={lead.alt}
-                  className="aspect-[16/11] w-full object-cover"
-                />
-              </div>
-            </ClipReveal>
+            <TiltCard rotateAmplitude={5} className="h-full">
+              <ClipReveal>
+                <div className="film-frame overflow-hidden">
+                  <img
+                    src={lead.src}
+                    alt={lead.alt}
+                    className="aspect-[16/11] w-full object-cover"
+                  />
+                </div>
+              </ClipReveal>
+            </TiltCard>
           </Reveal>
           <Reveal delay={0.08} className="md:col-span-5">
-            <ClipReveal direction="left" delay={0.05}>
-              <div className="film-frame overflow-hidden">
-                <img
-                  src={side.src}
-                  alt={side.alt}
-                  className="aspect-[4/5] w-full object-cover md:h-full"
-                />
-              </div>
-            </ClipReveal>
+            <TiltCard rotateAmplitude={5} className="h-full">
+              <ClipReveal direction="left" delay={0.05}>
+                <div className="film-frame overflow-hidden">
+                  <img
+                    src={side.src}
+                    alt={side.alt}
+                    className="aspect-[4/5] w-full object-cover md:h-full"
+                  />
+                </div>
+              </ClipReveal>
+            </TiltCard>
           </Reveal>
+        </div>
+      </section>
+
+      <section className="surface-mist py-14 sm:py-16 md:py-20">
+        <div className="section-pad container-wide">
+          <SectionHeading
+            eyebrow="Approach"
+            title="Calm, simple, honest"
+            description="A portrait session should feel easy — not like a performance."
+          />
+          <Stagger className="mt-10 grid gap-6 sm:mt-12 sm:grid-cols-3 sm:gap-8" stagger={0.08}>
+            {approach.map((item, i) => (
+              <StaggerItem key={item.title}>
+                <SpotlightCard className="h-full border-t border-sand pt-6">
+                  <p className="text-[0.65rem] tracking-[0.22em] text-camel uppercase">
+                    {String(i + 1).padStart(2, '0')}
+                  </p>
+                  <h3 className="mt-3 font-serif text-xl text-deep-brown sm:text-2xl">
+                    {item.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-soft-gray">{item.text}</p>
+                </SpotlightCard>
+              </StaggerItem>
+            ))}
+          </Stagger>
         </div>
       </section>
 

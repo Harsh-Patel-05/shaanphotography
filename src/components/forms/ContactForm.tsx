@@ -158,6 +158,9 @@ export function ContactForm() {
           <a href={siteConfig.social.instagram} target="_blank" rel="noreferrer" className="hover:text-chocolate">
             Instagram
           </a>
+          <a href={siteConfig.social.threads} target="_blank" rel="noreferrer" className="hover:text-chocolate">
+            Threads
+          </a>
           <a href={getMailtoLink()} className="hover:text-chocolate">
             Email
           </a>

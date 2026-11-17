@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { useIntro } from '../../context/IntroContext'
 
 type Props = {
   src: string
@@ -11,25 +12,25 @@ function atHeroTop() {
 }
 
 /**
- * Hero plays with sound only while mounted at page top.
- * Scroll away → unmount <video> entirely (only way to guarantee audio dies).
+ * Hero background video — autoplays without any click/button.
+ * Starts muted (browser-required for autoplay). Tries sound when policy allows.
  */
 export function HeroVideo({ src, poster, className = '' }: Props) {
+  const { introDone } = useIntro()
   const videoRef = useRef<HTMLVideoElement>(null)
-  const [active, setActive] = useState(() =>
+  const [inView, setInView] = useState(() =>
     typeof window === 'undefined' ? true : atHeroTop(),
   )
   const [ready, setReady] = useState(false)
   const [failed, setFailed] = useState(false)
 
-  const mediaSrc = src.includes('?') ? `${src}&v=audio` : `${src}?v=audio`
+  const shouldMount = introDone && inView && !failed
 
-  // Scroll → mount/unmount video (rAF throttled)
   useEffect(() => {
     let raf = 0
     const sync = () => {
       raf = 0
-      setActive((prev) => {
+      setInView((prev) => {
         const next = atHeroTop()
         return prev === next ? prev : next
       })
@@ -47,66 +48,57 @@ export function HeroVideo({ src, poster, className = '' }: Props) {
     }
   }, [])
 
-  // While mounted, play with sound; cleanup pauses before unmount
   useEffect(() => {
-    if (!active) return
+    if (!shouldMount) return
     const video = videoRef.current
     if (!video) return
 
     let cancelled = false
-    let retryTimer: number | undefined
 
-    const stop = () => {
-      video.pause()
+    const playAuto = async () => {
+      if (cancelled || !atHeroTop()) return
+
+      // Autoplay without click = must be muted (browser policy)
+      video.defaultMuted = true
       video.muted = true
       video.volume = 0
-    }
+      video.setAttribute('muted', '')
 
-    const play = async () => {
-      if (cancelled || !atHeroTop()) {
-        stop()
-        return
-      }
-      video.defaultMuted = false
-      video.muted = false
-      video.volume = 1
-      video.removeAttribute('muted')
       try {
         await video.play()
-        if (cancelled || !atHeroTop()) stop()
+        if (!cancelled) setReady(true)
       } catch {
-        // retry below
+        // rare
+      }
+
+      // If browser already trusts this site (MEI), sound may be allowed
+      try {
+        video.muted = false
+        video.volume = 1
+        video.removeAttribute('muted')
+        await video.play()
+      } catch {
+        video.muted = true
+        video.volume = 0
+        video.setAttribute('muted', '')
+        void video.play().catch(() => {})
       }
     }
 
-    void play()
-
-    let attempts = 0
-    const retry = () => {
-      if (cancelled || !atHeroTop()) return
-      attempts += 1
-      void play().then(() => {
-        if (cancelled || !atHeroTop()) return
-        if (video.paused && attempts < 25) {
-          retryTimer = window.setTimeout(retry, 350)
-        }
-      })
-    }
-    retryTimer = window.setTimeout(retry, 200)
+    void playAuto()
 
     const onVisibility = () => {
-      if (document.hidden) stop()
-      else void play()
+      if (document.hidden) video.pause()
+      else if (atHeroTop()) void playAuto()
     }
     document.addEventListener('visibilitychange', onVisibility)
 
     return () => {
       cancelled = true
-      if (retryTimer) window.clearTimeout(retryTimer)
       document.removeEventListener('visibilitychange', onVisibility)
-      stop()
+      video.pause()
     }
-  }, [active, mediaSrc])
+  }, [shouldMount, src])
 
   return (
     <div className={`absolute inset-0 overflow-hidden bg-deep-brown ${className}`}>
@@ -116,33 +108,26 @@ export function HeroVideo({ src, poster, className = '' }: Props) {
           alt=""
           aria-hidden
           className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
-            active && ready && !failed ? 'opacity-0' : 'opacity-100'
+            shouldMount && ready ? 'opacity-0' : 'opacity-100'
           }`}
         />
       ) : null}
 
-      {/* Unmounting is the only reliable way to stop audio on all browsers */}
-      {active && !failed ? (
+      {shouldMount ? (
         <video
           ref={videoRef}
-          key={mediaSrc}
+          key={`${src}-hero`}
           data-hero-video="true"
-          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
+          className={`pointer-events-none absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
             ready ? 'opacity-100' : 'opacity-0'
           }`}
-          src={mediaSrc}
+          src={src}
           poster={poster}
+          muted
           autoPlay
           loop
           playsInline
           preload="auto"
-          onCanPlay={(e) => {
-            setReady(true)
-            const el = e.currentTarget
-            el.muted = false
-            el.volume = 1
-            void el.play().catch(() => {})
-          }}
           onPlaying={() => setReady(true)}
           onError={() => setFailed(true)}
         />

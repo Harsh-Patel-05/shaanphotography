@@ -1,6 +1,8 @@
 import { ClipReveal } from '../../components/animations/ClipReveal'
 import { PageTransition } from '../../components/animations/PageTransition'
 import { Reveal } from '../../components/animations/Reveal'
+import { SpotlightCard } from '../../components/animations/SpotlightCard'
+import { TiltCard } from '../../components/animations/TiltCard'
 import { CtaBand } from '../../components/common/CtaBand'
 import { PageHero } from '../../components/common/PageHero'
 import { SEO } from '../../components/common/SEO'
@@ -56,26 +58,32 @@ export function EventsPage() {
           <SectionHeading eyebrow="Featured" title="A couple of stories" />
           <div className="mt-10 grid gap-8 sm:mt-12 sm:gap-10 md:grid-cols-2">
             {stories.map((story, i) => (
-              <Reveal key={story.title} delay={i * 0.06}>
-                <article className="group">
-                  <ClipReveal delay={i * 0.04}>
-                    <div className="film-frame overflow-hidden">
-                      <img
-                        src={storyImages[i]?.src}
-                        alt={story.title}
-                        className="aspect-[16/10] w-full object-cover transition duration-700 group-hover:scale-[1.03]"
-                        loading="lazy"
-                      />
+              <Reveal key={story.title} delay={i * 0.08}>
+                <SpotlightCard className="h-full p-0">
+                  <article className="group">
+                    <TiltCard rotateAmplitude={4}>
+                      <ClipReveal delay={i * 0.04}>
+                        <div className="film-frame overflow-hidden">
+                          <img
+                            src={storyImages[i]?.src}
+                            alt={story.title}
+                            className="aspect-[16/10] w-full object-cover transition duration-700 group-hover:scale-[1.03]"
+                            loading="lazy"
+                          />
+                        </div>
+                      </ClipReveal>
+                    </TiltCard>
+                    <div className="pt-4 sm:pt-5">
+                      <p className="text-[0.65rem] tracking-[0.2em] text-camel uppercase">
+                        {story.detail}
+                      </p>
+                      <h3 className="mt-1 font-serif text-xl text-deep-brown sm:text-2xl">
+                        {story.title}
+                      </h3>
+                      <p className="mt-2 text-sm text-soft-gray">{story.text}</p>
                     </div>
-                  </ClipReveal>
-                  <p className="mt-3 text-[0.65rem] tracking-[0.2em] text-camel uppercase sm:mt-4">
-                    {story.detail}
-                  </p>
-                  <h3 className="mt-1 font-serif text-xl text-deep-brown sm:text-2xl">
-                    {story.title}
-                  </h3>
-                  <p className="mt-2 text-sm text-soft-gray">{story.text}</p>
-                </article>
+                  </article>
+                </SpotlightCard>
               </Reveal>
             ))}
           </div>

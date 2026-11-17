@@ -8,6 +8,7 @@ import {
 import { footerNavLinks } from '../../data/navigationData'
 import { Reveal } from '../animations/Reveal'
 import { SplitText } from '../animations/SplitText'
+import { Stagger, StaggerItem } from '../animations/Stagger'
 import { Logo } from '../common/Logo'
 import { SocialIcons } from '../common/SocialIcons'
 
@@ -31,16 +32,19 @@ export function Footer() {
           />
         </Reveal>
 
-        <div className="mt-12 grid gap-12 border-t border-chocolate/70 pt-12 md:mt-16 md:grid-cols-2 md:gap-14 md:pt-16 lg:grid-cols-4">
-          <div className="lg:col-span-1">
+        <Stagger
+          className="mt-12 grid gap-12 border-t border-chocolate/70 pt-12 md:mt-16 md:grid-cols-2 md:gap-14 md:pt-16 lg:grid-cols-4"
+          stagger={0.07}
+        >
+          <StaggerItem className="lg:col-span-1">
             <Logo variant="dark" className="mb-5" />
             <p className="max-w-sm text-sm leading-relaxed text-sand/85">
               {siteConfig.brand.description}
             </p>
             <SocialIcons tone="light" className="mt-6" />
-          </div>
+          </StaggerItem>
 
-          <div>
+          <StaggerItem>
             <p className="mb-4 text-[0.68rem] tracking-[0.26em] text-camel uppercase">
               Explore
             </p>
@@ -56,9 +60,9 @@ export function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </StaggerItem>
 
-          <div>
+          <StaggerItem>
             <p className="mb-4 text-[0.68rem] tracking-[0.26em] text-camel uppercase">
               Contact
             </p>
@@ -93,13 +97,23 @@ export function Footer() {
                   rel="noreferrer"
                   className="transition hover:text-ivory"
                 >
-                  {siteConfig.social.instagramHandle}
+                  Instagram {siteConfig.social.instagramHandle}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={siteConfig.social.threads}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="transition hover:text-ivory"
+                >
+                  Threads {siteConfig.social.threadsHandle}
                 </a>
               </li>
             </ul>
-          </div>
+          </StaggerItem>
 
-          <div>
+          <StaggerItem>
             <p className="mb-4 text-[0.68rem] tracking-[0.26em] text-camel uppercase">
               Address
             </p>
@@ -121,8 +135,8 @@ export function Footer() {
             >
               View on map →
             </a>
-          </div>
-        </div>
+          </StaggerItem>
+        </Stagger>
 
         <div className="mt-12 flex flex-col gap-3 border-t border-chocolate/70 pt-8 text-xs tracking-wide text-soft-gray sm:mt-16 sm:flex-row sm:items-center sm:justify-between">
           <p>

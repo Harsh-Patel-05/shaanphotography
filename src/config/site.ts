@@ -4,28 +4,33 @@ export const siteConfig = {
     shortName: 'Shaan',
     tagline: 'Photographs that still feel like you.',
     description:
-      'Ahmedabad-based wedding and portrait photographer. I keep the small, true moments — the ones you’ll want to look at again years later.',
+      'Kalol-based wedding and portrait photographer. I keep the small, true moments — the ones you’ll want to look at again years later.',
   },
   contact: {
-    email: 'hello@shaanphotography.com',
-    phone: '+91 98765 43210',
-    phoneRaw: '919876543210',
-    whatsapp: '919876543210',
-    location: 'Ahmedabad, India',
+    email: 'Shaandigitalstudio@gmail.com',
+    phone: '+91 96012 73841',
+    phoneRaw: '919601273841',
+    whatsapp: '919601273841',
+    location: 'Kalol, Gujarat',
     address: {
-      line1: 'Shaan Photography Studio',
-      line2: 'Near CG Road, Navrangpura',
-      city: 'Ahmedabad',
+      line1: 'F/7, Municipal shopping',
+      line2: 'Near Tower police chowki, Tower chowk',
+      city: 'Kalol',
       state: 'Gujarat',
-      postal: '380009',
+      postal: '382721',
       country: 'India',
     },
-    /** Used for Google Maps embed + “Open in Maps” link */
-    mapQuery: 'Navrangpura, Ahmedabad, Gujarat, India',
+    /** Used for Google Maps “Open in Maps” link */
+    mapQuery: 'Shaan photography, Tower chowk, Kalol, Gujarat 382721',
+    /** Exact Google Maps embed iframe src */
+    mapEmbedUrl:
+      'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3665.9212765702646!2d72.49516867601237!3d23.24595160795437!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395c25e4b34b552b%3A0xe487dc35919281a9!2sShaan%20photography!5e0!3m2!1sen!2sin!4v1794909614288!5m2!1sen!2sin',
   },
   social: {
-    instagram: 'https://instagram.com/shaanphotography',
-    instagramHandle: '@shaanphotography',
+    instagram: 'https://instagram.com/shaan_photography_',
+    instagramHandle: '@shaan_photography_',
+    threads: 'https://www.threads.net/@shaan_photography_',
+    threadsHandle: '@shaan_photography_',
   },
   urls: {
     site: 'https://Harsh-Patel-05.github.io/shaanphotography',
@@ -52,5 +57,4 @@ export const getFullAddress = () => {
 export const getMapsSearchUrl = () =>
   `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(siteConfig.contact.mapQuery)}`
 
-export const getMapsEmbedUrl = () =>
-  `https://maps.google.com/maps?q=${encodeURIComponent(siteConfig.contact.mapQuery)}&z=14&output=embed`
+export const getMapsEmbedUrl = () => siteConfig.contact.mapEmbedUrl

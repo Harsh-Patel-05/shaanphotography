@@ -31,15 +31,14 @@ export const mediaIds = {
     cinematic: 'p065',
     about: 'p055',
     collections: {
-      /** Only true Wedding image in the library today */
-      wedding: 'p071',
+      wedding: 'p074',
       preWedding: 'p002',
       portrait: 'p028',
       events: 'p056',
       couple: 'p001',
     },
-    /** Instagram strip — not used elsewhere on Home */
-    instagram: ['p024', 'p026', 'p027', 'p029', 'p030', 'p049'],
+    /** Instagram strip — IG imports + library frames not used in selected */
+    instagram: ['p111', 'p119', 'p121', 'p120', 'p118', 'p122'],
     /** Favorites masonry — distinct from collections + instagram + about */
     selected: [
       'p011',
@@ -64,7 +63,7 @@ export const mediaIds = {
     bts: ['p051', 'p052', 'p053'],
   },
   services: {
-    wedding: 'p071',
+    wedding: 'p109',
     preWedding: 'p004',
     portrait: 'p033',
     events: 'p054',
@@ -72,7 +71,7 @@ export const mediaIds = {
   },
   /** Wedding page — only Wedding-category ids */
   wedding: {
-    hero: 'p071',
+    hero: 'p076',
   },
   /** Pre-Wedding page — only Pre-Wedding-category ids */
   preWedding: {
@@ -96,13 +95,28 @@ export const mediaIds = {
   },
 } as const
 
+/** Deduplicate by id + src so galleries never repeat the same frame. */
+function uniqueByIdSrc(list: GalleryImage[]): GalleryImage[] {
+  const seen = new Set<string>()
+  return list.filter((g) => {
+    const key = `${g.id}|${g.src}`
+    if (seen.has(g.id) || seen.has(g.src) || seen.has(key)) return false
+    seen.add(g.id)
+    seen.add(g.src)
+    seen.add(key)
+    return true
+  })
+}
+
 /** Category gallery excluding feature images already shown on that page. */
 export function getUniqueCategoryImages(
   category: GalleryCategory,
   excludeIds: readonly string[],
 ): GalleryImage[] {
   const exclude = new Set(excludeIds)
-  return galleryImages.filter((g) => g.category === category && !exclude.has(g.id))
+  return uniqueByIdSrc(
+    galleryImages.filter((g) => g.category === category && !exclude.has(g.id)),
+  )
 }
 
 export function getPortfolioImages(
@@ -114,7 +128,7 @@ export function getPortfolioImages(
     category === 'All'
       ? galleryImages
       : galleryImages.filter((g) => g.category === category)
-  return base.filter((g) => !exclude.has(g.id))
+  return uniqueByIdSrc(base.filter((g) => !exclude.has(g.id)))
 }
 
 export const featuredCollections = [

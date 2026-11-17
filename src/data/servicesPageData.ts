@@ -38,7 +38,7 @@ export const servicesPromises = [
   },
   {
     title: 'Travel-ready',
-    text: 'Based in Ahmedabad, available across Gujarat and destination days.',
+    text: 'Based in Kalol, available across Gujarat and destination days.',
   },
 ]
 

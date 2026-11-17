@@ -2,8 +2,10 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { BlurText } from '../../components/animations/BlurText'
+import { Magnet } from '../../components/animations/Magnet'
 import { PageTransition } from '../../components/animations/PageTransition'
 import { Reveal } from '../../components/animations/Reveal'
+import { ShinyText } from '../../components/animations/ShinyText'
 import { SplitText } from '../../components/animations/SplitText'
 import { SpotlightCard } from '../../components/animations/SpotlightCard'
 import { Stagger, StaggerItem } from '../../components/animations/Stagger'
@@ -15,7 +17,6 @@ import { SectionHeading } from '../../components/common/SectionHeading'
 import { SocialIcons } from '../../components/common/SocialIcons'
 import { ContactForm } from '../../components/forms/ContactForm'
 import {
-  getFullAddress,
   getMailtoLink,
   getMapsSearchUrl,
   getWhatsAppLink,
@@ -99,22 +100,34 @@ export function ContactPage() {
     <PageTransition>
       <SEO
         title="Contact"
-        description="Get in touch with Shaan Photography in Ahmedabad — weddings, portraits, events, and couple sessions via form, WhatsApp, or studio visit."
+        description="Get in touch with Shaan Photography in Kalol — weddings, portraits, events, and couple sessions via form, WhatsApp, or studio visit."
         path="/contact"
       />
 
       {/* Hero */}
-      <section className="relative overflow-hidden pt-24 pb-12 sm:pt-28 sm:pb-14 md:pt-36 md:pb-16">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(880px_480px_at_10%_-12%,rgb(193_154_107/0.16),transparent_55%),radial-gradient(640px_380px_at_100%_0%,rgb(232_217_197/0.42),transparent_50%)]" />
+      <section className="relative overflow-hidden pt-24 pb-14 sm:pt-28 sm:pb-16 md:pt-36 md:pb-20">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(880px_480px_at_10%_-12%,rgb(193_154_107/0.18),transparent_55%),radial-gradient(640px_380px_at_100%_0%,rgb(232_217_197/0.45),transparent_50%)]" />
+        <motion.div
+          aria-hidden
+          className="pointer-events-none absolute -top-8 right-[-8%] h-64 w-64 rounded-full bg-camel/10 blur-3xl sm:h-80 sm:w-80"
+          animate={reduced ? undefined : { y: [0, 18, 0], opacity: [0.35, 0.55, 0.35] }}
+          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <p
+          aria-hidden
+          className="pointer-events-none absolute top-[28%] right-[4%] hidden font-serif text-[clamp(4rem,12vw,9rem)] leading-none text-deep-brown/[0.035] select-none lg:block"
+        >
+          {siteConfig.brand.shortName}
+        </p>
 
         <div className="section-pad container-wide relative">
           <div className="grid items-end gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14">
             <div>
               <motion.p
                 className="inline-flex items-center gap-3 text-[0.7rem] tracking-[0.28em] text-desert uppercase"
-                initial={reduced ? false : { opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.55 }}
+                initial={reduced ? false : { opacity: 0, y: 12, filter: 'blur(6px)' }}
+                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                transition={{ duration: 0.6 }}
               >
                 <span className="h-px w-6 bg-desert/55" aria-hidden />
                 {contactHero.eyebrow}
@@ -123,47 +136,68 @@ export function ContactPage() {
               <BlurText
                 as="h1"
                 text={contactHero.title}
-                className="mt-3 font-serif text-[clamp(2.4rem,7vw,5rem)] leading-[1.05] text-deep-brown text-balance"
+                className="mt-3 font-serif text-[clamp(2.5rem,7.5vw,5.25rem)] leading-[1.04] text-deep-brown text-balance"
                 delay={70}
-                blur={11}
+                blur={12}
                 startDelay={0.08}
               />
 
               <SplitText
                 text={contactHero.description}
-                className="mt-5 max-w-xl text-soft-gray leading-relaxed sm:mt-6 sm:text-[1.02rem]"
-                delay={0.2}
+                className="mt-5 max-w-xl text-soft-gray leading-relaxed sm:mt-6 sm:text-[1.05rem]"
+                delay={0.22}
                 stagger={0.022}
               />
 
               <Reveal delay={0.4}>
-                <div className="mt-8 flex flex-wrap gap-3 sm:mt-10">
-                  <Button href={getWhatsAppLink()} target="_blank" rel="noreferrer">
-                    WhatsApp
-                  </Button>
-                  <Button to="/booking" variant="secondary">
-                    Book a Session
-                  </Button>
+                <div className="mt-8 flex flex-wrap items-center gap-3 sm:mt-10">
+                  <Magnet maxOffset={10} magnetStrength={3.6}>
+                    <Button href={getWhatsAppLink()} target="_blank" rel="noreferrer">
+                      WhatsApp
+                    </Button>
+                  </Magnet>
+                  <Magnet maxOffset={10} magnetStrength={3.6}>
+                    <Button to="/booking" variant="secondary">
+                      Book a Session
+                    </Button>
+                  </Magnet>
                 </div>
               </Reveal>
             </div>
 
-            <Reveal delay={0.15}>
-              <div className="border-t border-sand pt-6 lg:border-t-0 lg:border-l lg:pl-10 lg:pt-0">
-                <p className="text-[0.65rem] tracking-[0.2em] text-camel uppercase">Studio</p>
+            <Reveal delay={0.18}>
+              <SpotlightCard className="border border-sand/70 bg-warm-white/55 p-6 backdrop-blur-[2px] sm:p-7 lg:border-l-0">
+                <p className="text-[0.65rem] tracking-[0.22em] text-camel uppercase">Studio</p>
                 <p className="mt-3 font-serif text-2xl text-deep-brown sm:text-3xl">
-                  {address.city}
+                  <ShinyText speed={4.2}>{address.city}</ShinyText>
                 </p>
                 <p className="mt-2 text-sm leading-relaxed text-soft-gray">
                   {address.line1}
                   <br />
                   {address.line2}
+                  <br />
+                  {address.city}, {address.state} {address.postal}
                 </p>
-                <p className="mt-4 text-[0.65rem] tracking-[0.16em] text-soft-gray uppercase">
-                  {siteConfig.social.instagramHandle}
-                </p>
+                <div className="mt-5 flex flex-wrap gap-x-4 gap-y-1 text-[0.65rem] tracking-[0.14em] text-soft-gray uppercase">
+                  <a
+                    href={siteConfig.social.instagram}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="transition hover:text-deep-brown"
+                  >
+                    {siteConfig.social.instagramHandle}
+                  </a>
+                  <a
+                    href={siteConfig.social.threads}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="transition hover:text-deep-brown"
+                  >
+                    Threads
+                  </a>
+                </div>
                 <SocialIcons tone="dark" className="mt-5" />
-              </div>
+              </SpotlightCard>
             </Reveal>
           </div>
         </div>
@@ -192,24 +226,26 @@ export function ContactPage() {
                       : siteConfig.contact.location
 
               return (
-                <Reveal key={channel.id} delay={i * 0.05}>
-                  <a
-                    href={href}
-                    target={external ? '_blank' : undefined}
-                    rel={external ? 'noreferrer' : undefined}
-                    className="group block h-full border border-sand/80 bg-warm-white/70 p-5 transition hover:border-camel/70 hover:bg-warm-white sm:p-6"
-                  >
-                    <p className="text-[0.65rem] tracking-[0.2em] text-desert uppercase">
-                      {channel.label}
-                    </p>
-                    <p className="mt-3 font-serif text-xl text-deep-brown transition group-hover:text-chocolate sm:text-2xl">
-                      {channel.detail}
-                    </p>
-                    <p className="mt-2 truncate text-sm text-soft-gray">{value}</p>
-                    <p className="mt-5 text-[0.65rem] tracking-[0.16em] text-chocolate uppercase transition group-hover:text-deep-brown">
-                      {channel.cta} →
-                    </p>
-                  </a>
+                <Reveal key={channel.id} delay={i * 0.06}>
+                  <SpotlightCard className="h-full border border-sand/80 bg-warm-white/70 transition hover:border-camel/60">
+                    <a
+                      href={href}
+                      target={external ? '_blank' : undefined}
+                      rel={external ? 'noreferrer' : undefined}
+                      className="group block h-full p-5 sm:p-6"
+                    >
+                      <p className="text-[0.65rem] tracking-[0.2em] text-desert uppercase">
+                        {String(i + 1).padStart(2, '0')} · {channel.label}
+                      </p>
+                      <p className="mt-3 font-serif text-xl text-deep-brown transition group-hover:text-chocolate sm:text-2xl">
+                        {channel.detail}
+                      </p>
+                      <p className="mt-2 truncate text-sm text-soft-gray">{value}</p>
+                      <p className="mt-5 text-[0.65rem] tracking-[0.16em] text-chocolate uppercase transition group-hover:translate-x-1 group-hover:text-deep-brown">
+                        {channel.cta} →
+                      </p>
+                    </a>
+                  </SpotlightCard>
                 </Reveal>
               )
             })}
@@ -286,14 +322,24 @@ export function ContactPage() {
             <StaggerItem>
               <p className="mb-3 text-[0.7rem] tracking-[0.2em] text-desert uppercase">Social</p>
               <SocialIcons tone="dark" />
-              <a
-                href={siteConfig.social.instagram}
-                target="_blank"
-                rel="noreferrer"
-                className="mt-3 block text-sm text-soft-gray transition hover:text-deep-brown"
-              >
-                {siteConfig.social.instagramHandle}
-              </a>
+              <div className="mt-3 space-y-1 text-sm text-soft-gray">
+                <a
+                  href={siteConfig.social.instagram}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="block transition hover:text-deep-brown"
+                >
+                  Instagram {siteConfig.social.instagramHandle}
+                </a>
+                <a
+                  href={siteConfig.social.threads}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="block transition hover:text-deep-brown"
+                >
+                  Threads {siteConfig.social.threadsHandle}
+                </a>
+              </div>
             </StaggerItem>
           </Stagger>
         </div>
@@ -339,19 +385,78 @@ export function ContactPage() {
       </section>
 
       {/* Map */}
-      <section className="section-pad container-wide py-16 sm:py-20 md:py-28">
-        <Reveal>
-          <div className="mb-6 flex flex-wrap items-end justify-between gap-4 sm:mb-8">
-            <div>
+      <section className="relative overflow-hidden py-16 sm:py-20 md:py-28">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(700px_320px_at_80%_20%,rgb(193_154_107/0.12),transparent_55%)]" />
+        <div className="section-pad container-wide relative">
+          <Reveal>
+            <div className="mb-8 sm:mb-10">
               <p className="text-[0.7rem] tracking-[0.24em] text-desert uppercase">Find us</p>
-              <h2 className="mt-2 font-serif text-[clamp(1.75rem,3.5vw,2.75rem)] text-deep-brown">
-                Studio location
-              </h2>
+              <BlurText
+                as="h2"
+                text="Studio location"
+                className="mt-2 font-serif text-[clamp(1.75rem,3.5vw,2.75rem)] text-deep-brown"
+                delay={55}
+                blur={8}
+              />
             </div>
-            <p className="max-w-md text-sm text-soft-gray sm:text-right">{getFullAddress()}</p>
-          </div>
-          <MapEmbed className="film-frame min-h-[340px] sm:min-h-[440px]" />
-        </Reveal>
+
+            <div className="grid overflow-hidden border border-sand/80 bg-warm-white/70 lg:grid-cols-[0.9fr_1.2fr]">
+              <div className="flex flex-col justify-between gap-8 border-b border-sand/80 p-6 sm:p-8 lg:border-r lg:border-b-0 lg:p-9">
+                <div>
+                  <p className="text-[0.65rem] tracking-[0.2em] text-camel uppercase">Address</p>
+                  <address className="mt-3 not-italic">
+                    <p className="font-serif text-xl text-deep-brown sm:text-2xl">
+                      {address.line1}
+                    </p>
+                    <p className="mt-2 text-sm leading-relaxed text-soft-gray">
+                      {address.line2}
+                      <br />
+                      {address.city}, {address.state} {address.postal}
+                      <br />
+                      {address.country}
+                    </p>
+                  </address>
+
+                  <div className="mt-7 space-y-4">
+                    <div>
+                      <p className="text-[0.65rem] tracking-[0.18em] text-desert uppercase">Phone</p>
+                      <a
+                        href={`tel:${siteConfig.contact.phoneRaw}`}
+                        className="mt-1 block font-serif text-lg text-deep-brown transition hover:text-chocolate"
+                      >
+                        {siteConfig.contact.phone}
+                      </a>
+                    </div>
+                    <div>
+                      <p className="text-[0.65rem] tracking-[0.18em] text-desert uppercase">Email</p>
+                      <a
+                        href={getMailtoLink()}
+                        className="mt-1 block break-all text-sm text-deep-brown transition hover:text-chocolate"
+                      >
+                        {siteConfig.contact.email}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap gap-3">
+                  <Magnet maxOffset={8} magnetStrength={3.6}>
+                    <Button href={getMapsSearchUrl()} target="_blank" rel="noreferrer">
+                      Get directions
+                    </Button>
+                  </Magnet>
+                  <Magnet maxOffset={8} magnetStrength={3.6}>
+                    <Button href={getWhatsAppLink()} target="_blank" rel="noreferrer" variant="secondary">
+                      WhatsApp
+                    </Button>
+                  </Magnet>
+                </div>
+              </div>
+
+              <MapEmbed showBar={false} className="h-full min-h-0" />
+            </div>
+          </Reveal>
+        </div>
       </section>
 
       {/* FAQ */}

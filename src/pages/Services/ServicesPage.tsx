@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { BlurText } from '../../components/animations/BlurText'
 import { ClipReveal } from '../../components/animations/ClipReveal'
+import { Magnet } from '../../components/animations/Magnet'
 import { PageTransition } from '../../components/animations/PageTransition'
 import { Reveal } from '../../components/animations/Reveal'
 import { SplitText } from '../../components/animations/SplitText'
@@ -118,10 +119,14 @@ export function ServicesPage() {
 
               <Reveal delay={0.4}>
                 <div className="mt-8 flex flex-wrap gap-3 sm:mt-10">
-                  <Button to="/booking">Request a Quote</Button>
-                  <Button to="/portfolio" variant="secondary">
-                    View Portfolio
-                  </Button>
+                  <Magnet maxOffset={10} magnetStrength={3.6}>
+                    <Button to="/booking">Request a Quote</Button>
+                  </Magnet>
+                  <Magnet maxOffset={10} magnetStrength={3.6}>
+                    <Button to="/portfolio" variant="secondary">
+                      View Portfolio
+                    </Button>
+                  </Magnet>
                 </div>
               </Reveal>
             </div>

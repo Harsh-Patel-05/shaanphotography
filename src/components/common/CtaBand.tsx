@@ -1,6 +1,8 @@
 import type { ReactNode } from 'react'
 import { BlurText } from '../animations/BlurText'
+import { Magnet } from '../animations/Magnet'
 import { Reveal } from '../animations/Reveal'
+import { SplitText } from '../animations/SplitText'
 import { Button } from './Button'
 
 type Props = {
@@ -12,7 +14,7 @@ type Props = {
   tone?: 'light' | 'stone'
 }
 
-/** Consistent end-of-page CTA with soft motion. */
+/** End-of-page CTA — blur title, split copy, magnetic buttons. */
 export function CtaBand({
   title,
   description,
@@ -29,7 +31,9 @@ export function CtaBand({
     >
       {tone === 'light' ? (
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(700px_380px_at_50%_0%,rgb(193_154_107/0.14),transparent_60%)]" />
-      ) : null}
+      ) : (
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(640px_320px_at_50%_10%,rgb(193_154_107/0.1),transparent_55%)]" />
+      )}
       <div className="section-pad container-wide relative">
         <div className="mx-auto max-w-2xl text-center">
           <Reveal>
@@ -42,15 +46,26 @@ export function CtaBand({
               blur={8}
             />
             {description ? (
-              <p className="mx-auto mt-4 max-w-xl text-soft-gray">{description}</p>
+              <SplitText
+                text={description}
+                className="mx-auto mt-4 max-w-xl text-soft-gray"
+                delay={0.12}
+                stagger={0.018}
+              />
             ) : null}
             {(primary || secondary) && (
               <div className="mt-8 flex flex-wrap justify-center gap-3 sm:gap-4">
-                {primary ? <Button to={primary.to}>{primary.label}</Button> : null}
+                {primary ? (
+                  <Magnet maxOffset={10} magnetStrength={3.6}>
+                    <Button to={primary.to}>{primary.label}</Button>
+                  </Magnet>
+                ) : null}
                 {secondary ? (
-                  <Button to={secondary.to} variant="secondary">
-                    {secondary.label}
-                  </Button>
+                  <Magnet maxOffset={10} magnetStrength={3.6}>
+                    <Button to={secondary.to} variant="secondary">
+                      {secondary.label}
+                    </Button>
+                  </Magnet>
                 ) : null}
               </div>
             )}

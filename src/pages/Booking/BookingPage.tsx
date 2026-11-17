@@ -2,8 +2,10 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { BlurText } from '../../components/animations/BlurText'
+import { Magnet } from '../../components/animations/Magnet'
 import { PageTransition } from '../../components/animations/PageTransition'
 import { Reveal } from '../../components/animations/Reveal'
+import { ShinyText } from '../../components/animations/ShinyText'
 import { SplitText } from '../../components/animations/SplitText'
 import { SpotlightCard } from '../../components/animations/SpotlightCard'
 import { Stagger, StaggerItem } from '../../components/animations/Stagger'
@@ -122,28 +124,32 @@ export function BookingPage() {
 
               <Reveal delay={0.4}>
                 <div className="mt-8 flex flex-wrap gap-3 sm:mt-10">
-                  <Button href={getWhatsAppLink()} target="_blank" rel="noreferrer">
-                    WhatsApp first
-                  </Button>
-                  <Button to="/services" variant="secondary">
-                    View services
-                  </Button>
+                  <Magnet maxOffset={10} magnetStrength={3.6}>
+                    <Button href={getWhatsAppLink()} target="_blank" rel="noreferrer">
+                      WhatsApp first
+                    </Button>
+                  </Magnet>
+                  <Magnet maxOffset={10} magnetStrength={3.6}>
+                    <Button to="/services" variant="secondary">
+                      View services
+                    </Button>
+                  </Magnet>
                 </div>
               </Reveal>
             </div>
 
             <Reveal delay={0.15}>
-              <div className="border-t border-sand pt-6 lg:border-t-0 lg:border-l lg:pl-10 lg:pt-0">
+              <SpotlightCard className="border border-sand/70 bg-warm-white/55 p-6 backdrop-blur-[2px] sm:p-7">
                 <p className="text-[0.65rem] tracking-[0.2em] text-camel uppercase">Based in</p>
                 <p className="mt-3 font-serif text-2xl text-deep-brown sm:text-3xl">
-                  {siteConfig.contact.location}
+                  <ShinyText speed={4.2}>{siteConfig.contact.location}</ShinyText>
                 </p>
                 <p className="mt-2 text-sm leading-relaxed text-soft-gray">
                   Local and destination coverage. After the form, WhatsApp or email locks things in
                   fastest.
                 </p>
                 <SocialIcons tone="dark" className="mt-5" />
-              </div>
+              </SpotlightCard>
             </Reveal>
           </div>
         </div>

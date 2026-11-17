@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { BlurText } from '../../components/animations/BlurText'
 import { ClipReveal } from '../../components/animations/ClipReveal'
+import { Magnet } from '../../components/animations/Magnet'
 import { PageTransition } from '../../components/animations/PageTransition'
 import { ParallaxImage } from '../../components/animations/ParallaxImage'
 import { Reveal } from '../../components/animations/Reveal'
@@ -154,16 +155,20 @@ export function PreWeddingPage() {
               {preWeddingHero.description}
             </p>
             <div className="mt-8 flex flex-wrap gap-3 sm:mt-10 sm:gap-4">
-              <Button to="/booking" variant="light">
-                Inquire Now
-              </Button>
-              <Button
-                to="/wedding"
-                variant="secondary"
-                className="border-sand/40 text-ivory hover:border-ivory/50 hover:bg-ivory/10"
-              >
-                Wedding Coverage
-              </Button>
+              <Magnet maxOffset={10} magnetStrength={3.6}>
+                <Button to="/booking" variant="light">
+                  Inquire Now
+                </Button>
+              </Magnet>
+              <Magnet maxOffset={10} magnetStrength={3.6}>
+                <Button
+                  to="/wedding"
+                  variant="secondary"
+                  className="border-sand/40 text-ivory hover:border-ivory/50 hover:bg-ivory/10"
+                >
+                  Wedding Coverage
+                </Button>
+              </Magnet>
             </div>
             <p className="mt-6 text-[0.65rem] tracking-[0.18em] text-sand/70 uppercase">
               {images.length} frames · {siteConfig.contact.location}

@@ -65,7 +65,7 @@ export const weddingIncludes = [
   },
   {
     title: 'Travel-ready planning',
-    text: 'Ahmedabad-based, available across Gujarat and destination weddings.',
+    text: 'Kalol-based, available across Gujarat and destination weddings.',
   },
 ]
 
@@ -84,7 +84,7 @@ export const weddingFaq = [
   },
   {
     q: 'Can you travel for our wedding?',
-    a: 'Yes. I’m based in Ahmedabad and regularly travel for weddings across India. Share your date and city and I’ll confirm availability and travel notes.',
+    a: 'Yes. I’m based in Kalol and regularly travel for weddings across India. Share your date and city and I’ll confirm availability and travel notes.',
   },
 ]
 

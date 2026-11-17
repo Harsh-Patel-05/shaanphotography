@@ -14,6 +14,9 @@ function usePauseOffscreenVideos() {
       raf = 0
       const viewH = window.innerHeight || 1
       document.querySelectorAll('video').forEach((video) => {
+        // Hero manages its own play/pause + sound — never mute it here
+        if (video.hasAttribute('data-hero-video')) return
+
         const rect = video.getBoundingClientRect()
         const visible = Math.min(rect.bottom, viewH) - Math.max(rect.top, 0)
         const ratio = visible <= 0 ? 0 : visible / Math.max(rect.height, 1)

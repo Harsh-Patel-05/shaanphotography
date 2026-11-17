@@ -61,7 +61,7 @@ export const contactFaq = [
     a: 'Yes — visits are by appointment. Message me a few time options and we’ll lock a slot.',
   },
   {
-    q: 'Do you travel outside Ahmedabad?',
+    q: 'Do you travel outside Kalol?',
     a: 'Yes. Destination weddings and out-of-town sessions are welcome. Share the city and dates and I’ll confirm availability.',
   },
 ]
