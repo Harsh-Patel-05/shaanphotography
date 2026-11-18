@@ -138,7 +138,8 @@ export function Magnet({
   return (
     <div
       ref={wrapperRef}
-      className={`inline-block ${wrapperClassName}`}
+      // Avoid `inline-block hidden` conflicts — wrapperClassName owns display when set.
+      className={wrapperClassName || 'inline-block'}
       style={style}
       {...props}
     >

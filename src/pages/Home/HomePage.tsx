@@ -87,7 +87,7 @@ export function HomePage() {
           <BlurText
             as="h1"
             text={siteConfig.brand.tagline}
-            className="max-w-4xl font-serif text-[clamp(2.4rem,8.5vw,5.75rem)] leading-[1.02] font-medium text-ivory text-balance"
+            className="max-w-4xl font-serif text-[clamp(2.05rem,7.2vw,5.75rem)] leading-[1.06] font-medium text-ivory text-balance sm:leading-[1.02]"
             delay={90}
             startDelay={0.4}
             blur={14}
@@ -95,7 +95,7 @@ export function HomePage() {
             direction="bottom"
           />
           <motion.p
-            className="mt-5 max-w-xl text-sm text-sand/90 sm:mt-6 sm:text-base md:text-lg"
+            className="mt-5 max-w-xl text-sm leading-relaxed text-sand/90 sm:mt-6 sm:text-base md:text-lg"
             initial={reduced ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.75, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
@@ -104,18 +104,18 @@ export function HomePage() {
             so they still feel like you years later.
           </motion.p>
           <motion.div
-            className="mt-8 flex flex-wrap gap-3 sm:mt-10 sm:gap-4"
+            className="mt-8 flex w-full flex-col gap-3 min-[400px]:flex-row min-[400px]:flex-wrap sm:mt-10 sm:gap-4"
             initial={reduced ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.9, duration: 0.7 }}
           >
-            <Button to="/portfolio" variant="light">
+            <Button to="/portfolio" variant="light" className="w-full min-[400px]:w-auto">
               See the Work
             </Button>
             <Button
               to="/booking"
               variant="secondary"
-              className="border-sand/40 text-ivory hover:bg-ivory/10 hover:border-ivory/50"
+              className="w-full border-sand/40 text-ivory hover:bg-ivory/10 hover:border-ivory/50 min-[400px]:w-auto"
             >
               Get in Touch
             </Button>

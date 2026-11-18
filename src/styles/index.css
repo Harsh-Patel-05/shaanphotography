@@ -129,7 +129,7 @@
   }
 
   .section-pad {
-    padding-inline: clamp(1.25rem, 4vw, 4rem);
+    padding-inline: clamp(1.35rem, 5vw, 4rem);
   }
 
   .container-narrow {
