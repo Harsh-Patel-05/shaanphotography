@@ -1,34 +1,47 @@
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import { useEffect, useMemo, useState } from 'react'
+import {
+  AnimatePresence,
+  animate,
+  motion,
+  useMotionValue,
+  useMotionValueEvent,
+  useReducedMotion,
+  useTransform,
+} from 'framer-motion'
+import { useEffect, useState } from 'react'
 import { siteConfig } from '../../config/site'
 import { useIntro } from '../../context/IntroContext'
 import { useScrollLock } from '../../hooks/useScrollLock'
 
 const ease = [0.22, 1, 0.36, 1] as const
+const progressEase = [0.33, 0.0, 0.12, 1] as const
 
-const RING = 148
-const STROKE = 2
+const RING = 156
+const STROKE = 1.75
 const RADIUS = (RING - STROKE) / 2
 const CIRCUMFERENCE = 2 * Math.PI * RADIUS
 
 /**
- * Studio ring intro — balanced, not empty, not flashy.
- * Wordmark inside progress ring + tagline + soft status.
+ * Studio ring intro — GPU-smooth progress (motion values, no per-frame React).
  */
 export function PageLoader() {
   const reduced = useReducedMotion()
   const { setIntroDone } = useIntro()
   const [visible, setVisible] = useState(() => reduced !== true)
   const [exiting, setExiting] = useState(false)
-  const [progress, setProgress] = useState(0)
+  const [percent, setPercent] = useState(0)
+  const [status, setStatus] = useState('Opening gallery')
 
-  const percent = Math.round(progress * 100)
-  const dashOffset = useMemo(
-    () => CIRCUMFERENCE * (1 - progress),
-    [progress],
-  )
+  const progress = useMotionValue(0)
+  const dashOffset = useTransform(progress, (v) => CIRCUMFERENCE * (1 - v))
+  const barScale = useTransform(progress, (v) => Math.max(0.001, v))
 
   useScrollLock(visible)
+
+  useMotionValueEvent(progress, 'change', (v) => {
+    const next = Math.round(v * 100)
+    setPercent((prev) => (prev === next ? prev : next))
+    if (v >= 0.995) setStatus('Welcome in')
+  })
 
   useEffect(() => {
     if (reduced) {
@@ -36,35 +49,30 @@ export function PageLoader() {
       return
     }
 
-    let raf = 0
     let holdTimer = 0
     let exitTimer = 0
-    const duration = 2400
-    const start = performance.now()
+    let cancelled = false
 
-    const tick = (now: number) => {
-      const t = Math.min(1, (now - start) / duration)
-      setProgress(1 - Math.pow(1 - t, 2.6))
-
-      if (t < 1) {
-        raf = requestAnimationFrame(tick)
-      } else {
-        setProgress(1)
+    const controls = animate(progress, 1, {
+      duration: 2.15,
+      ease: progressEase,
+      onComplete: () => {
+        if (cancelled) return
         holdTimer = window.setTimeout(() => {
           setIntroDone(true)
           setExiting(true)
-          exitTimer = window.setTimeout(() => setVisible(false), 750)
-        }, 420)
-      }
-    }
+          exitTimer = window.setTimeout(() => setVisible(false), 820)
+        }, 380)
+      },
+    })
 
-    raf = requestAnimationFrame(tick)
     return () => {
-      cancelAnimationFrame(raf)
+      cancelled = true
+      controls.stop()
       window.clearTimeout(holdTimer)
       window.clearTimeout(exitTimer)
     }
-  }, [reduced, setIntroDone])
+  }, [progress, reduced, setIntroDone])
 
   return (
     <AnimatePresence>
@@ -72,7 +80,7 @@ export function PageLoader() {
         <motion.div
           key="studio-loader"
           className="fixed inset-0 z-[100] flex flex-col bg-[#1c1512]"
-          style={{ color: '#faf7f2' }}
+          style={{ color: '#faf7f2', willChange: 'opacity' }}
           aria-busy="true"
           aria-live="polite"
           role="status"
@@ -80,15 +88,18 @@ export function PageLoader() {
           initial={{ opacity: 1 }}
           animate={{ opacity: exiting ? 0 : 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.7, ease }}
+          transition={{ duration: 0.75, ease }}
         >
           {/* Warm glow */}
-          <div
+          <motion.div
             className="pointer-events-none absolute inset-0"
             style={{
               background:
                 'radial-gradient(620px 400px at 50% 40%, rgba(193,154,107,0.18), transparent 65%)',
             }}
+            initial={{ opacity: 0.55, scale: 0.96 }}
+            animate={{ opacity: exiting ? 0 : 1, scale: exiting ? 1.04 : 1 }}
+            transition={{ duration: exiting ? 0.7 : 1.2, ease }}
           />
 
           {/* Floating accents */}
@@ -112,7 +123,12 @@ export function PageLoader() {
           />
 
           {/* Top meta */}
-          <div className="relative z-[1] flex items-center justify-between px-6 pt-8 sm:px-10">
+          <motion.div
+            className="relative z-[1] flex items-center justify-between px-6 pt-8 sm:px-10"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: exiting ? 0 : 1, y: exiting ? -6 : 0 }}
+            transition={{ duration: 0.55, ease, delay: exiting ? 0 : 0.12 }}
+          >
             <p
               className="text-[0.65rem] uppercase"
               style={{ letterSpacing: '0.28em', color: 'rgba(232,217,197,0.55)' }}
@@ -132,15 +148,20 @@ export function PageLoader() {
             >
               Est. Studio
             </p>
-          </div>
+          </motion.div>
 
           {/* Center stage */}
           <div className="relative z-[1] flex flex-1 flex-col items-center justify-center px-6">
             <motion.div
               className="relative flex items-center justify-center"
               style={{ width: RING, height: RING }}
-              animate={exiting ? { scale: 1.06, opacity: 0 } : { scale: 1, opacity: 1 }}
-              transition={{ duration: 0.45, ease }}
+              initial={{ opacity: 0, scale: 0.92 }}
+              animate={
+                exiting
+                  ? { scale: 1.08, opacity: 0 }
+                  : { scale: 1, opacity: 1 }
+              }
+              transition={{ duration: exiting ? 0.55 : 0.7, ease }}
             >
               <svg
                 className="absolute inset-0 -rotate-90"
@@ -157,7 +178,22 @@ export function PageLoader() {
                   stroke="rgba(255,255,255,0.1)"
                   strokeWidth={STROKE}
                 />
-                <circle
+                {/* Soft under-glow stroke */}
+                <motion.circle
+                  cx={RING / 2}
+                  cy={RING / 2}
+                  r={RADIUS}
+                  fill="none"
+                  stroke="rgba(193,154,107,0.28)"
+                  strokeWidth={STROKE + 3}
+                  strokeLinecap="round"
+                  strokeDasharray={CIRCUMFERENCE}
+                  style={{
+                    strokeDashoffset: dashOffset,
+                    filter: 'blur(2.5px)',
+                  }}
+                />
+                <motion.circle
                   cx={RING / 2}
                   cy={RING / 2}
                   r={RADIUS}
@@ -166,34 +202,42 @@ export function PageLoader() {
                   strokeWidth={STROKE}
                   strokeLinecap="round"
                   strokeDasharray={CIRCUMFERENCE}
-                  strokeDashoffset={dashOffset}
-                  style={{ transition: 'stroke-dashoffset 40ms linear' }}
+                  style={{
+                    strokeDashoffset: dashOffset,
+                    willChange: 'stroke-dashoffset',
+                  }}
                 />
               </svg>
 
               <div className="relative z-[1] flex flex-col items-center">
-                <p
+                <motion.p
                   className="font-serif italic"
                   style={{
-                    fontSize: '2rem',
+                    fontSize: '2.05rem',
                     letterSpacing: '0.04em',
                     color: '#faf7f2',
                     lineHeight: 1,
                   }}
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.18, duration: 0.65, ease }}
                 >
                   {siteConfig.brand.shortName}
-                </p>
-                <p
-                  className="mt-2 tabular-nums"
+                </motion.p>
+                <motion.p
+                  className="mt-2.5 tabular-nums"
                   style={{
                     fontFamily: 'var(--font-serif)',
-                    fontSize: '0.75rem',
-                    letterSpacing: '0.12em',
-                    color: 'rgba(193,154,107,0.9)',
+                    fontSize: '0.72rem',
+                    letterSpacing: '0.14em',
+                    color: 'rgba(193,154,107,0.92)',
                   }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.35, duration: 0.45 }}
                 >
                   {String(percent).padStart(2, '0')}
-                </p>
+                </motion.p>
               </div>
             </motion.div>
 
@@ -204,14 +248,19 @@ export function PageLoader() {
                 lineHeight: 1.55,
                 color: 'rgba(232,217,197,0.78)',
               }}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.25, duration: 0.55, ease }}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: exiting ? 0 : 1, y: exiting ? 6 : 0 }}
+              transition={{ delay: exiting ? 0 : 0.28, duration: 0.6, ease }}
             >
               {siteConfig.brand.tagline}
             </motion.p>
 
-            <div className="mt-7 flex items-center gap-3">
+            <motion.div
+              className="mt-7 flex items-center gap-3"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: exiting ? 0 : 1 }}
+              transition={{ delay: exiting ? 0 : 0.42, duration: 0.5 }}
+            >
               <span className="h-px w-7" style={{ background: 'rgba(193,154,107,0.55)' }} />
               <span
                 className="text-[0.62rem] uppercase"
@@ -220,17 +269,22 @@ export function PageLoader() {
                 Photography
               </span>
               <span className="h-px w-7" style={{ background: 'rgba(193,154,107,0.55)' }} />
-            </div>
+            </motion.div>
           </div>
 
           {/* Bottom bar */}
-          <div className="relative z-[1] px-6 pb-8 sm:px-10">
+          <motion.div
+            className="relative z-[1] px-6 pb-8 sm:px-10"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: exiting ? 0 : 1, y: exiting ? 8 : 0 }}
+            transition={{ duration: 0.55, ease, delay: exiting ? 0 : 0.2 }}
+          >
             <div className="mb-3 flex items-center justify-between">
               <span
                 className="text-[0.62rem] uppercase"
                 style={{ letterSpacing: '0.24em', color: 'rgba(232,217,197,0.45)' }}
               >
-                {percent < 100 ? 'Opening gallery' : 'Welcome in'}
+                {status}
               </span>
               <span
                 className="text-[0.62rem] uppercase"
@@ -243,15 +297,16 @@ export function PageLoader() {
               className="h-[2px] w-full overflow-hidden rounded-full"
               style={{ background: 'rgba(255,255,255,0.08)' }}
             >
-              <div
-                className="h-full rounded-full origin-left"
+              <motion.div
+                className="h-full w-full origin-left rounded-full"
                 style={{
-                  width: `${percent}%`,
+                  scaleX: barScale,
                   background: 'linear-gradient(90deg, #a67b52, #c19a6b, #e8d9c5)',
+                  willChange: 'transform',
                 }}
               />
             </div>
-          </div>
+          </motion.div>
         </motion.div>
       ) : null}
     </AnimatePresence>
