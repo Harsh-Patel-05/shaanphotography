@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react'
 import { getMailtoLink, getWhatsAppLink, siteConfig } from '../../config/site'
 import { serviceOptions } from '../../data/servicesData'
+import { submitStudioInquiry } from '../../utils/submitInquiry'
 import { hasErrors, required, validateEmail, validatePhone, type FieldErrors } from '../../utils/validation'
 import { Button } from '../common/Button'
 import { TextInput, TextSelect, TextTextarea } from './FormField'
@@ -29,6 +30,8 @@ export function ContactForm() {
   const [values, setValues] = useState<FormState>(initial)
   const [errors, setErrors] = useState<FieldErrors>({})
   const [success, setSuccess] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState('')
 
   const update = (key: keyof FormState, value: string) => {
     setValues((prev) => ({ ...prev, [key]: value }))
@@ -46,27 +49,53 @@ export function ContactForm() {
     return !hasErrors(next)
   }
 
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault()
     if (!validate()) return
-    setSuccess(true)
+
+    setSubmitting(true)
+    setSubmitError('')
+
+    try {
+      await submitStudioInquiry({
+        formType: 'Contact note',
+        subject: `NEW contact inquiry — ${values.name} · ${values.service}`,
+        replyTo: values.email,
+        clientName: values.name,
+        fields: {
+          Name: values.name,
+          Email: values.email,
+          Phone: values.phone,
+          Service: values.service,
+          'Event date': values.eventDate || 'Not shared',
+          Location: values.location || 'Not shared',
+          Message: values.message,
+        },
+      })
+      setSuccess(true)
+    } catch (err) {
+      setSubmitError(
+        err instanceof Error
+          ? err.message
+          : 'Could not send your note. Please try again.',
+      )
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   if (success) {
     return (
       <div className="border border-sand bg-warm-white p-8 sm:p-10">
-        <p className="text-[0.7rem] tracking-[0.22em] text-desert uppercase">Almost there</p>
+        <p className="text-[0.7rem] tracking-[0.22em] text-desert uppercase">Message sent</p>
         <h3 className="mt-3 font-serif text-3xl text-deep-brown">Thanks, {values.name}.</h3>
         <p className="mt-4 max-w-lg text-sm leading-relaxed text-soft-gray">
-          Your note is ready on this page. To actually reach me, continue on WhatsApp or email —
-          that’s the fastest way.
+          Your note was sent to the studio, and a confirmation email is on its way to{' '}
+          {values.email}. I’ll get back to you soon — usually within a day.
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           <Button href={getWhatsAppLink(`Hi, I'm ${values.name}. ${values.message}`)} target="_blank" rel="noreferrer">
-            Continue on WhatsApp
-          </Button>
-          <Button href={getMailtoLink(`Inquiry from ${values.name}`)} variant="secondary">
-            Email Studio
+            Also message on WhatsApp
           </Button>
           <Button
             type="button"
@@ -74,6 +103,7 @@ export function ContactForm() {
             onClick={() => {
               setSuccess(false)
               setValues(initial)
+              setSubmitError('')
             }}
           >
             Send another
@@ -149,8 +179,15 @@ export function ContactForm() {
         error={errors.message}
         placeholder="A few lines about your day or shoot..."
       />
+      {submitError ? (
+        <p className="text-sm text-red-700" role="alert">
+          {submitError}
+        </p>
+      ) : null}
       <div className="flex flex-col gap-4 pt-2 sm:flex-row sm:items-center sm:justify-between">
-        <Button type="submit">Submit Inquiry</Button>
+        <Button type="submit" disabled={submitting}>
+          {submitting ? 'Sending…' : 'Submit Inquiry'}
+        </Button>
         <div className="flex flex-wrap gap-4 text-xs tracking-[0.14em] text-soft-gray uppercase">
           <a href={getWhatsAppLink()} target="_blank" rel="noreferrer" className="hover:text-chocolate">
             WhatsApp

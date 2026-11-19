@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react'
-import { getMailtoLink, getWhatsAppLink } from '../../config/site'
+import { getWhatsAppLink } from '../../config/site'
 import { serviceOptions } from '../../data/servicesData'
+import { submitStudioInquiry } from '../../utils/submitInquiry'
 import { hasErrors, required, validateEmail, validatePhone, type FieldErrors } from '../../utils/validation'
 import { Button } from '../common/Button'
 import { TextInput, TextSelect, TextTextarea } from './FormField'
@@ -39,6 +40,8 @@ export function BookingForm() {
   const [values, setValues] = useState<FormState>(initial)
   const [errors, setErrors] = useState<FieldErrors>({})
   const [success, setSuccess] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState('')
 
   const update = (key: keyof FormState, value: string) => {
     setValues((prev) => ({ ...prev, [key]: value }))
@@ -58,22 +61,52 @@ export function BookingForm() {
     return !hasErrors(next)
   }
 
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault()
     if (!validate()) return
-    setSuccess(true)
+
+    setSubmitting(true)
+    setSubmitError('')
+
+    try {
+      await submitStudioInquiry({
+        formType: 'Booking request',
+        subject: `NEW booking request — ${values.fullName} · ${values.photographyType}`,
+        replyTo: values.email,
+        clientName: values.fullName,
+        fields: {
+          Name: values.fullName,
+          Email: values.email,
+          Mobile: values.mobile,
+          'Photography type': values.photographyType,
+          'Event date': values.eventDate,
+          'Event location': values.eventLocation,
+          Budget: values.budget || 'Not shared',
+          Details: values.details,
+        },
+      })
+      setSuccess(true)
+    } catch (err) {
+      setSubmitError(
+        err instanceof Error
+          ? err.message
+          : 'Could not send your booking request. Please try again.',
+      )
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   if (success) {
     return (
       <div className="py-2 sm:py-4">
-        <p className="text-[0.7rem] tracking-[0.22em] text-desert uppercase">Almost booked</p>
+        <p className="text-[0.7rem] tracking-[0.22em] text-desert uppercase">Request sent</p>
         <h3 className="mt-3 font-serif text-3xl text-deep-brown">
           Got it, {values.fullName}.
         </h3>
         <p className="mt-4 max-w-lg text-sm leading-relaxed text-soft-gray">
-          Your details are ready here. Jump to WhatsApp or email next so we can talk dates and
-          finalize everything.
+          Your booking request was sent to the studio, and a confirmation email is on its way to{' '}
+          {values.email}. I’ll reply soon with availability and next steps.
         </p>
         <dl className="mt-6 grid gap-3 border-t border-sand/80 pt-5 text-sm sm:grid-cols-2">
           <div>
@@ -97,10 +130,18 @@ export function BookingForm() {
             target="_blank"
             rel="noreferrer"
           >
-            Continue on WhatsApp
+            Also message on WhatsApp
           </Button>
-          <Button href={getMailtoLink(`Booking inquiry — ${values.fullName}`)} variant="secondary">
-            Email Studio
+          <Button
+            type="button"
+            variant="ghost"
+            onClick={() => {
+              setSuccess(false)
+              setValues(initial)
+              setSubmitError('')
+            }}
+          >
+            Send another
           </Button>
         </div>
       </div>
@@ -195,7 +236,14 @@ export function BookingForm() {
         error={errors.details}
         placeholder="Anything helpful — guest count, venues, vibe, timelines..."
       />
-      <Button type="submit">Request a Quote</Button>
+      {submitError ? (
+        <p className="text-sm text-red-700" role="alert">
+          {submitError}
+        </p>
+      ) : null}
+      <Button type="submit" disabled={submitting}>
+        {submitting ? 'Sending…' : 'Request a Quote'}
+      </Button>
     </form>
   )
 }

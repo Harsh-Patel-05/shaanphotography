@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Email template preview · Shaan Photography</title>
+    <style>
+      :root {
+        --ivory: #faf7f2;
+        --sand: #e8d9c5;
+        --camel: #c19a6b;
+        --desert: #a67b52;
+        --chocolate: #5c4332;
+        --deep: #2a1f1a;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: Georgia, 'Times New Roman', serif;
+        background: #ebe4da;
+        color: var(--deep);
+        padding: 32px 16px 64px;
+      }
+      .page {
+        max-width: 720px;
+        margin: 0 auto;
+      }
+      .note {
+        font-family: system-ui, sans-serif;
+        font-size: 13px;
+        line-height: 1.5;
+        color: #5c5148;
+        background: #fff;
+        border: 1px solid var(--sand);
+        border-radius: 12px;
+        padding: 14px 16px;
+        margin-bottom: 28px;
+      }
+      .note code {
+        background: #f3ebe1;
+        padding: 1px 6px;
+        border-radius: 4px;
+        font-size: 12px;
+      }
+      .tabs {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 16px;
+        font-family: system-ui, sans-serif;
+      }
+      .tabs button {
+        border: 1px solid var(--sand);
+        background: #fff;
+        color: var(--deep);
+        padding: 10px 14px;
+        border-radius: 999px;
+        cursor: pointer;
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .tabs button.active {
+        background: var(--deep);
+        color: var(--ivory);
+        border-color: var(--deep);
+      }
+      .mail {
+        background: #fff;
+        border: 1px solid #d9cbb8;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 18px 50px rgb(42 31 26 / 0.1);
+      }
+      .mail-header {
+        background: linear-gradient(135deg, #2a1f1a, #5c4332);
+        color: var(--ivory);
+        padding: 28px 28px 24px;
+        text-align: center;
+      }
+      .mail-header img {
+        display: inline-block;
+        width: 150px;
+        max-width: 70%;
+        height: auto;
+        margin: 0 auto 14px;
+      }
+      .mail-header p {
+        margin: 0;
+        font-family: system-ui, sans-serif;
+        font-size: 11px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--camel);
+      }
+      .mail-header h1 {
+        margin: 12px 0 0;
+        font-size: 24px;
+        font-weight: 500;
+        line-height: 1.25;
+      }
+      .meta {
+        font-family: system-ui, sans-serif;
+        font-size: 12px;
+        color: #6d6258;
+        padding: 14px 28px;
+        border-bottom: 1px solid #efe6da;
+        background: #fcfaf7;
+      }
+      .meta strong { color: var(--deep); }
+      .body {
+        padding: 8px 0 8px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: system-ui, sans-serif;
+        font-size: 14px;
+      }
+      th, td {
+        text-align: left;
+        padding: 14px 28px;
+        border-bottom: 1px solid #f0e7db;
+        vertical-align: top;
+      }
+      th {
+        width: 38%;
+        color: #7a6d61;
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        font-weight: 600;
+        background: #fbf8f3;
+      }
+      td {
+        color: var(--deep);
+        line-height: 1.55;
+      }
+      .footer {
+        padding: 18px 28px 24px;
+        font-family: system-ui, sans-serif;
+        font-size: 12px;
+        color: #7a6d61;
+        background: #f8f3ec;
+      }
+      .hidden { display: none; }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="note">
+        Ye <strong>preview</strong> hai (design reference).<br />
+        Asli Gmail pe FormSubmit ka table mail aata hai — pehli baar
+        <strong>Activate</strong> confirm karna padta hai, phir Contact / Booking inquiries
+        seedha <code>Shaandigitalstudio@gmail.com</code> pe aa jayengi.
+        <br /><br />
+        Note: FormSubmit custom logo support nahi karta, isliye live mail me logo nahi aata —
+        fields + subject branded format me aate hain.
+      </div>
+
+      <div class="tabs">
+        <button type="button" class="active" data-tab="contact">Contact note</button>
+        <button type="button" data-tab="booking">Booking request</button>
+      </div>
+
+      <div class="mail" id="contact">
+        <div class="mail-header">
+          <img src="./brand/shaan-logo-email-white.png" alt="Shaan Photography" />
+          <p>Shaan Photography · Studio inbox</p>
+          <h1>New contact note — Aanya Sharma · Wedding Photography</h1>
+        </div>
+        <div class="meta">
+          <div><strong>To:</strong> Shaandigitalstudio@gmail.com</div>
+          <div><strong>Reply-To:</strong> aanya@example.com</div>
+          <div><strong>Subject:</strong> New contact note — Aanya Sharma · Wedding Photography</div>
+        </div>
+        <div class="body">
+          <table>
+            <tr><th>Studio</th><td>Shaan Photography</td></tr>
+            <tr><th>Form type</th><td>Contact note</td></tr>
+            <tr><th>Name</th><td>Aanya Sharma</td></tr>
+            <tr><th>Email</th><td>aanya@example.com</td></tr>
+            <tr><th>Phone</th><td>+91 98765 43210</td></tr>
+            <tr><th>Service</th><td>Wedding Photography</td></tr>
+            <tr><th>Event date</th><td>2026-12-14</td></tr>
+            <tr><th>Location</th><td>Udaipur</td></tr>
+            <tr><th>Message</th><td>Hi Shaan, we’d love soft candid coverage for our wedding weekend — two venues, about 180 guests.</td></tr>
+          </table>
+        </div>
+        <div class="footer">
+          Reply to this email to respond directly to the client.
+        </div>
+      </div>
+
+      <div class="mail hidden" id="booking">
+        <div class="mail-header">
+          <img src="./brand/shaan-logo-email-white.png" alt="Shaan Photography" />
+          <p>Shaan Photography · Studio inbox</p>
+          <h1>New booking request — Rohan Mehta · Pre-Wedding Photography</h1>
+        </div>
+        <div class="meta">
+          <div><strong>To:</strong> Shaandigitalstudio@gmail.com</div>
+          <div><strong>Reply-To:</strong> rohan@example.com</div>
+          <div><strong>Subject:</strong> New booking request — Rohan Mehta · Pre-Wedding Photography</div>
+        </div>
+        <div class="body">
+          <table>
+            <tr><th>Studio</th><td>Shaan Photography</td></tr>
+            <tr><th>Form type</th><td>Booking request</td></tr>
+            <tr><th>Name</th><td>Rohan Mehta</td></tr>
+            <tr><th>Email</th><td>rohan@example.com</td></tr>
+            <tr><th>Mobile</th><td>+91 99887 76655</td></tr>
+            <tr><th>Photography type</th><td>Pre-Wedding Photography</td></tr>
+            <tr><th>Event date</th><td>2026-11-28</td></tr>
+            <tr><th>Event location</th><td>Goa</td></tr>
+            <tr><th>Budget</th><td>₹50,000 – ₹1,00,000</td></tr>
+            <tr><th>Details</th><td>Sunset beach + one indoor location. Looking for natural, easy poses — half day.</td></tr>
+          </table>
+        </div>
+        <div class="footer">
+          Reply to this email to respond directly to the client.
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const buttons = document.querySelectorAll('.tabs button')
+      const contact = document.getElementById('contact')
+      const booking = document.getElementById('booking')
+      buttons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          buttons.forEach((b) => b.classList.remove('active'))
+          btn.classList.add('active')
+          const tab = btn.getAttribute('data-tab')
+          contact.classList.toggle('hidden', tab !== 'contact')
+          booking.classList.toggle('hidden', tab !== 'booking')
+        })
+      })
+    </script>
+  </body>
+</html>

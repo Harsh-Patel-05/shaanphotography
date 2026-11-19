@@ -8,20 +8,25 @@ import {
   useTransform,
 } from 'framer-motion'
 import { useEffect, useState } from 'react'
+import logoWhite from '../../assets/logos/shaan-logo-white.png'
 import { siteConfig } from '../../config/site'
 import { useIntro } from '../../context/IntroContext'
+import { asset } from '../../utils/asset'
 import { useScrollLock } from '../../hooks/useScrollLock'
 
 const ease = [0.22, 1, 0.36, 1] as const
 const progressEase = [0.33, 0.0, 0.12, 1] as const
 
-const RING = 156
-const STROKE = 1.75
-const RADIUS = (RING - STROKE) / 2
+const RING = 210
+const STROKE = 1.5
+const RADIUS = (RING - STROKE) / 2 - 4
 const CIRCUMFERENCE = 2 * Math.PI * RADIUS
 
+/** User-selected loader backdrop (IMG_6360 wedding frame). */
+const LOADER_BG = asset('/media/photos/p071-img-6360-jpg.jpg')
+
 /**
- * Studio ring intro — GPU-smooth progress (motion values, no per-frame React).
+ * Studio intro — blurred photo, camel ring, centered Shaan Photography mark.
  */
 export function PageLoader() {
   const reduced = useReducedMotion()
@@ -29,18 +34,15 @@ export function PageLoader() {
   const [visible, setVisible] = useState(() => reduced !== true)
   const [exiting, setExiting] = useState(false)
   const [percent, setPercent] = useState(0)
-  const [status, setStatus] = useState('Opening gallery')
 
   const progress = useMotionValue(0)
   const dashOffset = useTransform(progress, (v) => CIRCUMFERENCE * (1 - v))
-  const barScale = useTransform(progress, (v) => Math.max(0.001, v))
 
   useScrollLock(visible)
 
   useMotionValueEvent(progress, 'change', (v) => {
     const next = Math.round(v * 100)
     setPercent((prev) => (prev === next ? prev : next))
-    if (v >= 0.995) setStatus('Welcome in')
   })
 
   useEffect(() => {
@@ -54,7 +56,7 @@ export function PageLoader() {
     let cancelled = false
 
     const controls = animate(progress, 1, {
-      duration: 2.15,
+      duration: 2.35,
       ease: progressEase,
       onComplete: () => {
         if (cancelled) return
@@ -62,7 +64,7 @@ export function PageLoader() {
           setIntroDone(true)
           setExiting(true)
           exitTimer = window.setTimeout(() => setVisible(false), 820)
-        }, 380)
+        }, 420)
       },
     })
 
@@ -79,7 +81,7 @@ export function PageLoader() {
       {visible ? (
         <motion.div
           key="studio-loader"
-          className="fixed inset-0 z-[100] flex flex-col bg-[#1c1512]"
+          className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden bg-deep-brown"
           style={{ color: '#faf7f2', willChange: 'opacity' }}
           aria-busy="true"
           aria-live="polite"
@@ -88,81 +90,71 @@ export function PageLoader() {
           initial={{ opacity: 1 }}
           animate={{ opacity: exiting ? 0 : 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.75, ease }}
+          transition={{ duration: 0.8, ease }}
         >
-          {/* Warm glow */}
+          {/* Photo — full-bleed cover, framed on the couple (portrait src) */}
           <motion.div
-            className="pointer-events-none absolute inset-0"
-            style={{
-              background:
-                'radial-gradient(620px 400px at 50% 40%, rgba(193,154,107,0.18), transparent 65%)',
+            className="absolute inset-0 overflow-hidden"
+            initial={{ opacity: 0.94 }}
+            animate={{
+              opacity: exiting ? 0.8 : 1,
+              scale: exiting ? 1.04 : 1,
             }}
-            initial={{ opacity: 0.55, scale: 0.96 }}
-            animate={{ opacity: exiting ? 0 : 1, scale: exiting ? 1.04 : 1 }}
-            transition={{ duration: exiting ? 0.7 : 1.2, ease }}
-          />
-
-          {/* Floating accents */}
-          <motion.span
-            className="pointer-events-none absolute top-[20%] left-[14%] size-1.5 rounded-full"
-            style={{ background: 'rgba(193,154,107,0.55)' }}
-            animate={{ y: [0, -10, 0], opacity: [0.35, 0.8, 0.35] }}
-            transition={{ duration: 3.4, repeat: Infinity, ease: 'easeInOut' }}
-          />
-          <motion.span
-            className="pointer-events-none absolute top-[32%] right-[18%] size-1 rounded-full"
-            style={{ background: 'rgba(232,217,197,0.45)' }}
-            animate={{ y: [0, 12, 0], opacity: [0.25, 0.7, 0.25] }}
-            transition={{ duration: 4.1, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-          />
-          <motion.span
-            className="pointer-events-none absolute bottom-[26%] left-[20%] size-1 rounded-full"
-            style={{ background: 'rgba(193,154,107,0.4)' }}
-            animate={{ x: [0, 8, 0], opacity: [0.2, 0.6, 0.2] }}
-            transition={{ duration: 3.8, repeat: Infinity, ease: 'easeInOut', delay: 0.9 }}
-          />
-
-          {/* Top meta */}
-          <motion.div
-            className="relative z-[1] flex items-center justify-between px-6 pt-8 sm:px-10"
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: exiting ? 0 : 1, y: exiting ? -6 : 0 }}
-            transition={{ duration: 0.55, ease, delay: exiting ? 0 : 0.12 }}
+            transition={{ duration: exiting ? 0.85 : 1.6, ease }}
           >
-            <p
-              className="text-[0.65rem] uppercase"
-              style={{ letterSpacing: '0.28em', color: 'rgba(232,217,197,0.55)' }}
-            >
-              {siteConfig.contact.location}
-            </p>
-            <div
-              className="h-px w-12 sm:w-16"
+            <img
+              src={LOADER_BG}
+              alt=""
+              aria-hidden
+              className="absolute inset-0 h-full w-full object-cover"
               style={{
-                background:
-                  'linear-gradient(90deg, transparent, rgba(193,154,107,0.7), transparent)',
+                /* Portrait 2:3 on wide screens — bias up so heads stay in frame */
+                objectPosition: 'center 28%',
+                filter: 'blur(4px) saturate(1.12) brightness(0.9)',
               }}
+              decoding="async"
+              fetchPriority="high"
             />
-            <p
-              className="text-[0.65rem] uppercase"
-              style={{ letterSpacing: '0.28em', color: 'rgba(232,217,197,0.55)' }}
-            >
-              Est. Studio
-            </p>
           </motion.div>
 
-          {/* Center stage */}
-          <div className="relative z-[1] flex flex-1 flex-col items-center justify-center px-6">
+          {/* Warm desert wash — brand palette, not flat black */}
+          <div
+            className="pointer-events-none absolute inset-0"
+            style={{
+              background: `
+                radial-gradient(55% 45% at 50% 42%, rgba(193,154,107,0.18), transparent 70%),
+                radial-gradient(90% 70% at 50% 50%, rgba(42,31,26,0.22), rgba(42,31,26,0.62)),
+                linear-gradient(180deg, rgba(42,31,26,0.35), rgba(42,31,26,0.55) 55%, rgba(28,21,18,0.72))
+              `,
+            }}
+          />
+
+          {/* Center mark */}
+          <div className="relative z-[1] flex flex-col items-center px-6">
             <motion.div
               className="relative flex items-center justify-center"
               style={{ width: RING, height: RING }}
-              initial={{ opacity: 0, scale: 0.92 }}
+              initial={{ opacity: 0, scale: 0.88 }}
               animate={
                 exiting
-                  ? { scale: 1.08, opacity: 0 }
+                  ? { scale: 1.1, opacity: 0 }
                   : { scale: 1, opacity: 1 }
               }
-              transition={{ duration: exiting ? 0.55 : 0.7, ease }}
+              transition={{ duration: exiting ? 0.55 : 0.75, ease }}
             >
+              {/* Soft glass plate */}
+              <div
+                className="pointer-events-none absolute inset-3 rounded-full"
+                style={{
+                  background:
+                    'radial-gradient(circle at 50% 40%, rgba(250,247,242,0.08), rgba(42,31,26,0.45) 62%, rgba(42,31,26,0.15) 100%)',
+                  boxShadow:
+                    'inset 0 1px 0 rgba(232,217,197,0.18), 0 20px 50px rgba(0,0,0,0.28)',
+                  border: '1px solid rgba(232,217,197,0.12)',
+                }}
+                aria-hidden
+              />
+
               <svg
                 className="absolute inset-0 -rotate-90"
                 width={RING}
@@ -170,35 +162,37 @@ export function PageLoader() {
                 viewBox={`0 0 ${RING} ${RING}`}
                 aria-hidden
               >
+                {/* Track */}
                 <circle
                   cx={RING / 2}
                   cy={RING / 2}
                   r={RADIUS}
                   fill="none"
-                  stroke="rgba(255,255,255,0.1)"
+                  stroke="rgba(232,217,197,0.18)"
                   strokeWidth={STROKE}
                 />
-                {/* Soft under-glow stroke */}
+                {/* Camel glow */}
                 <motion.circle
                   cx={RING / 2}
                   cy={RING / 2}
                   r={RADIUS}
                   fill="none"
-                  stroke="rgba(193,154,107,0.28)"
-                  strokeWidth={STROKE + 3}
+                  stroke="rgba(193,154,107,0.45)"
+                  strokeWidth={STROKE + 4}
                   strokeLinecap="round"
                   strokeDasharray={CIRCUMFERENCE}
                   style={{
                     strokeDashoffset: dashOffset,
-                    filter: 'blur(2.5px)',
+                    filter: 'blur(3px)',
                   }}
                 />
+                {/* Progress — desert → camel */}
                 <motion.circle
                   cx={RING / 2}
                   cy={RING / 2}
                   r={RADIUS}
                   fill="none"
-                  stroke="#c19a6b"
+                  stroke="url(#loaderRingGrad)"
                   strokeWidth={STROKE}
                   strokeLinecap="round"
                   strokeDasharray={CIRCUMFERENCE}
@@ -207,106 +201,86 @@ export function PageLoader() {
                     willChange: 'stroke-dashoffset',
                   }}
                 />
+                <defs>
+                  <linearGradient id="loaderRingGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#a67b52" />
+                    <stop offset="55%" stopColor="#c19a6b" />
+                    <stop offset="100%" stopColor="#e8d9c5" />
+                  </linearGradient>
+                </defs>
               </svg>
 
-              <div className="relative z-[1] flex flex-col items-center">
-                <motion.p
-                  className="font-serif italic"
+              <motion.div
+                className="relative z-[1] flex flex-col items-center px-4"
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.18, duration: 0.65, ease }}
+              >
+                <img
+                  src={logoWhite}
+                  alt=""
+                  aria-hidden
+                  className="h-10 w-auto object-contain sm:h-11"
+                  style={{ filter: 'drop-shadow(0 10px 22px rgba(0,0,0,0.4))' }}
+                  width={240}
+                  height={96}
+                  decoding="async"
+                />
+                <div
+                  className="mt-2.5 h-px w-8"
                   style={{
-                    fontSize: '2.05rem',
-                    letterSpacing: '0.04em',
-                    color: '#faf7f2',
-                    lineHeight: 1,
+                    background:
+                      'linear-gradient(90deg, transparent, rgba(193,154,107,0.85), transparent)',
                   }}
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.18, duration: 0.65, ease }}
-                >
-                  {siteConfig.brand.shortName}
-                </motion.p>
-                <motion.p
-                  className="mt-2.5 tabular-nums"
+                  aria-hidden
+                />
+                <p
+                  className="mt-2.5 text-[0.6rem] uppercase sm:text-[0.64rem]"
                   style={{
-                    fontFamily: 'var(--font-serif)',
-                    fontSize: '0.72rem',
-                    letterSpacing: '0.14em',
-                    color: 'rgba(193,154,107,0.92)',
+                    letterSpacing: '0.38em',
+                    color: '#c19a6b',
+                    textShadow: '0 2px 12px rgba(0,0,0,0.35)',
+                    marginLeft: '0.38em',
+                    fontFamily: 'var(--font-sans)',
+                    fontWeight: 500,
                   }}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.35, duration: 0.45 }}
                 >
-                  {String(percent).padStart(2, '0')}
-                </motion.p>
-              </div>
+                  Photography
+                </p>
+                <span className="sr-only">{siteConfig.brand.name}</span>
+              </motion.div>
             </motion.div>
-
-            <motion.p
-              className="mt-9 max-w-[18rem] text-center font-serif italic sm:max-w-[22rem]"
-              style={{
-                fontSize: '1.05rem',
-                lineHeight: 1.55,
-                color: 'rgba(232,217,197,0.78)',
-              }}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: exiting ? 0 : 1, y: exiting ? 6 : 0 }}
-              transition={{ delay: exiting ? 0 : 0.28, duration: 0.6, ease }}
-            >
-              {siteConfig.brand.tagline}
-            </motion.p>
 
             <motion.div
-              className="mt-7 flex items-center gap-3"
+              className="mt-7 flex flex-col items-center gap-2"
               initial={{ opacity: 0 }}
               animate={{ opacity: exiting ? 0 : 1 }}
-              transition={{ delay: exiting ? 0 : 0.42, duration: 0.5 }}
+              transition={{ delay: 0.3, duration: 0.45 }}
             >
-              <span className="h-px w-7" style={{ background: 'rgba(193,154,107,0.55)' }} />
-              <span
-                className="text-[0.62rem] uppercase"
-                style={{ letterSpacing: '0.26em', color: 'rgba(232,217,197,0.5)' }}
+              <p
+                className="tabular-nums"
+                style={{
+                  fontFamily: 'var(--font-serif)',
+                  fontSize: '0.8rem',
+                  letterSpacing: '0.2em',
+                  color: '#e8d9c5',
+                  textShadow: '0 2px 14px rgba(0,0,0,0.4)',
+                }}
               >
-                Photography
-              </span>
-              <span className="h-px w-7" style={{ background: 'rgba(193,154,107,0.55)' }} />
+                {String(percent).padStart(2, '0')}
+                <span style={{ color: 'rgba(193,154,107,0.7)', marginLeft: 2 }}>%</span>
+              </p>
+              <p
+                className="text-[0.58rem] uppercase"
+                style={{
+                  letterSpacing: '0.3em',
+                  color: 'rgba(232,217,197,0.55)',
+                }}
+              >
+                {percent < 100 ? 'Opening studio' : 'Welcome in'}
+              </p>
             </motion.div>
           </div>
-
-          {/* Bottom bar */}
-          <motion.div
-            className="relative z-[1] px-6 pb-8 sm:px-10"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: exiting ? 0 : 1, y: exiting ? 8 : 0 }}
-            transition={{ duration: 0.55, ease, delay: exiting ? 0 : 0.2 }}
-          >
-            <div className="mb-3 flex items-center justify-between">
-              <span
-                className="text-[0.62rem] uppercase"
-                style={{ letterSpacing: '0.24em', color: 'rgba(232,217,197,0.45)' }}
-              >
-                {status}
-              </span>
-              <span
-                className="text-[0.62rem] uppercase"
-                style={{ letterSpacing: '0.24em', color: 'rgba(193,154,107,0.75)' }}
-              >
-                Shaan Photography
-              </span>
-            </div>
-            <div
-              className="h-[2px] w-full overflow-hidden rounded-full"
-              style={{ background: 'rgba(255,255,255,0.08)' }}
-            >
-              <motion.div
-                className="h-full w-full origin-left rounded-full"
-                style={{
-                  scaleX: barScale,
-                  background: 'linear-gradient(90deg, #a67b52, #c19a6b, #e8d9c5)',
-                  willChange: 'transform',
-                }}
-              />
-            </div>
-          </motion.div>
         </motion.div>
       ) : null}
     </AnimatePresence>
