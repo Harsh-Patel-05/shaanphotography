@@ -69,6 +69,7 @@ export function EventsPage() {
                             alt={story.title}
                             className="aspect-[16/10] w-full object-cover transition duration-700 group-hover:scale-[1.03]"
                             loading="lazy"
+                            decoding="async"
                           />
                         </div>
                       </ClipReveal>

@@ -92,25 +92,6 @@ export const aboutFocus = [
   },
 ]
 
-export const aboutDelivery = [
-  {
-    title: 'Private online gallery',
-    text: 'Password-ready sharing for family and friends, with easy downloads.',
-  },
-  {
-    title: 'Warm color finish',
-    text: 'Consistent desert-inspired tones — soft, natural, never overdone.',
-  },
-  {
-    title: 'Print-ready files',
-    text: 'High-resolution selects sized for albums, frames, and social.',
-  },
-  {
-    title: 'Clear timelines',
-    text: 'You’ll know when sneak peeks and the full gallery are expected.',
-  },
-]
-
 export const aboutFaq = [
   {
     q: 'Do you travel for weddings and shoots?',

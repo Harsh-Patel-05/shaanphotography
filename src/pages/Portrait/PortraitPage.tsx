@@ -57,6 +57,9 @@ export function PortraitPage() {
                     src={lead.src}
                     alt={lead.alt}
                     className="aspect-[16/11] w-full object-cover"
+                    loading="eager"
+                    fetchPriority="high"
+                    decoding="async"
                   />
                 </div>
               </ClipReveal>
@@ -70,6 +73,8 @@ export function PortraitPage() {
                     src={side.src}
                     alt={side.alt}
                     className="aspect-[4/5] w-full object-cover md:h-full"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
               </ClipReveal>

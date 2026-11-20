@@ -9,8 +9,6 @@ import { ParallaxImage } from '../../components/animations/ParallaxImage'
 import { Reveal } from '../../components/animations/Reveal'
 import { ScrollFloat } from '../../components/animations/ScrollFloat'
 import { SplitText } from '../../components/animations/SplitText'
-import { SpotlightCard } from '../../components/animations/SpotlightCard'
-import { Stagger, StaggerItem } from '../../components/animations/Stagger'
 import { TiltCard } from '../../components/animations/TiltCard'
 import { Button } from '../../components/common/Button'
 import { CtaBand } from '../../components/common/CtaBand'
@@ -20,15 +18,10 @@ import { MasonryGrid } from '../../components/gallery/MasonryGrid'
 import { siteConfig } from '../../config/site'
 import { getUniqueCategoryImages, img, mediaIds } from '../../data/mediaMap'
 import {
-  preWeddingApproach,
   preWeddingFaq,
-  preWeddingFlow,
   preWeddingHero,
-  preWeddingIncludes,
   preWeddingLocations,
-  preWeddingMoods,
 } from '../../data/preWeddingData'
-import { testimonials } from '../../data/testimonialsData'
 
 function FaqItem({
   question,
@@ -93,10 +86,6 @@ export function PreWeddingPage() {
   const locationImages = mediaIds.preWedding.locations.map((id) =>
     img(id, 'Pre-Wedding'),
   )
-  const quotes = testimonials.filter((t) =>
-    t.detail.toLowerCase().includes('pre-wedding'),
-  )
-  const kindWords = quotes.length > 0 ? quotes : testimonials.slice(1, 3)
 
   return (
     <PageTransition>
@@ -177,164 +166,40 @@ export function PreWeddingPage() {
         </div>
       </section>
 
-      {/* Approach */}
-      <section className="section-pad container-wide py-16 sm:py-20 md:py-28">
-        <div className="grid gap-12 lg:grid-cols-12 lg:gap-14">
-          <div className="lg:col-span-5">
-            <SectionHeading
-              align="left"
-              eyebrow="Approach"
-              title="Relaxed sessions. Real chemistry."
-              description="This isn’t a stiff shoot — it’s time together, kept with soft light and easy direction."
-              className="max-w-md"
-            />
-          </div>
-          <div className="lg:col-span-7">
-            <div className="grid gap-8 sm:grid-cols-3 sm:gap-6">
-              {preWeddingApproach.map((item, i) => (
-                <Reveal key={item.title} delay={i * 0.07}>
-                  <SpotlightCard className="h-full border-t border-sand pt-6">
-                    <p className="text-[0.65rem] tracking-[0.26em] text-camel uppercase">
-                      {item.num}
-                    </p>
-                    <h3 className="mt-3 font-serif text-xl text-deep-brown sm:text-2xl">
-                      {item.title}
-                    </h3>
-                    <p className="mt-3 text-sm leading-relaxed text-soft-gray">{item.text}</p>
-                  </SpotlightCard>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Locations */}
-      <section className="surface-mist py-16 sm:py-20 md:py-28">
-        <div className="section-pad container-wide">
-          <SectionHeading
-            eyebrow="Locations"
-            title="Places that set the mood"
-            description="We choose spots for light, space, and how you feel there — not for cluttered backdrops."
-          />
-
-          <div className="mt-10 grid gap-6 sm:mt-12 sm:grid-cols-2 md:grid-cols-3 md:gap-7">
-            {preWeddingLocations.map((loc, i) => (
-              <Reveal key={loc.title} delay={i * 0.06}>
-                <article className="group">
-                  <TiltCard rotateAmplitude={5} scaleOnHover={1.015}>
-                    <ClipReveal delay={i * 0.04}>
-                      <div className="film-frame overflow-hidden">
-                        <img
-                          src={locationImages[i]?.src}
-                          alt={`${loc.title} — ${loc.location}`}
-                          className="aspect-[3/4] w-full object-cover transition duration-700 group-hover:scale-105"
-                          loading="lazy"
-                        />
-                      </div>
-                    </ClipReveal>
-                  </TiltCard>
-                  <p className="mt-3 text-[0.65rem] tracking-[0.2em] text-camel uppercase sm:mt-4">
-                    {loc.location}
-                  </p>
-                  <h2 className="mt-1 font-serif text-xl text-deep-brown sm:text-2xl">
-                    {loc.title}
-                  </h2>
-                  <p className="mt-2 text-sm text-soft-gray">{loc.text}</p>
-                </article>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Moods */}
-      <section className="section-pad container-wide py-14 sm:py-16 md:py-20">
+      <section className="section-pad container-wide py-16 sm:py-20 md:py-28">
         <SectionHeading
-          eyebrow="Mood"
-          title="What do you want it to feel like?"
+          eyebrow="Locations"
+          title="Places that set the mood"
+          description="We choose spots for light, space, and how you feel there — not for cluttered backdrops."
         />
-        <div className="mt-10 grid gap-6 sm:mt-12 md:grid-cols-3 md:gap-8">
-          {preWeddingMoods.map((mood, i) => (
-            <Reveal key={mood.title} delay={i * 0.06}>
-              <div className="border-t border-sand pt-6">
-                <p className="text-[0.65rem] tracking-[0.22em] text-camel uppercase">
-                  {String(i + 1).padStart(2, '0')}
+
+        <div className="mt-10 grid gap-6 sm:mt-12 sm:grid-cols-2 md:grid-cols-3 md:gap-7">
+          {preWeddingLocations.map((loc, i) => (
+            <Reveal key={loc.title} delay={i * 0.06}>
+              <article className="group">
+                <TiltCard rotateAmplitude={5} scaleOnHover={1.015}>
+                  <ClipReveal delay={i * 0.04}>
+                    <div className="film-frame overflow-hidden">
+                      <img
+                        src={locationImages[i]?.src}
+                        alt={`${loc.title} — ${loc.location}`}
+                        className="aspect-[3/4] w-full object-cover transition duration-700 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                    </div>
+                  </ClipReveal>
+                </TiltCard>
+                <p className="mt-3 text-[0.65rem] tracking-[0.2em] text-camel uppercase sm:mt-4">
+                  {loc.location}
                 </p>
-                <h3 className="mt-3 font-serif text-2xl text-deep-brown">{mood.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-soft-gray">{mood.text}</p>
-              </div>
+                <h2 className="mt-1 font-serif text-xl text-deep-brown sm:text-2xl">
+                  {loc.title}
+                </h2>
+                <p className="mt-2 text-sm text-soft-gray">{loc.text}</p>
+              </article>
             </Reveal>
           ))}
-        </div>
-      </section>
-
-      {/* Flow */}
-      <section className="surface-stone py-16 sm:py-20 md:py-28">
-        <div className="section-pad container-wide">
-          <div className="grid items-start gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
-            <SectionHeading
-              align="left"
-              eyebrow="The session"
-              title="Calm from first chat to final gallery"
-              description="A simple path so you can enjoy the shoot — not stress the logistics."
-              className="max-w-md"
-            />
-
-            <Stagger className="space-y-0" stagger={0.07}>
-              {preWeddingFlow.map((step, i) => (
-                <StaggerItem key={step.title}>
-                  <div className="grid grid-cols-[3rem_1fr] gap-4 border-t border-camel/25 py-6 sm:grid-cols-[4rem_1fr] sm:gap-6 sm:py-7">
-                    <p className="pt-1 font-serif text-2xl text-camel/80 sm:text-3xl">
-                      {String(i + 1).padStart(2, '0')}
-                    </p>
-                    <div>
-                      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                        <h3 className="font-serif text-xl text-deep-brown sm:text-2xl">
-                          {step.title}
-                        </h3>
-                        <span className="text-[0.65rem] tracking-[0.16em] text-soft-gray uppercase">
-                          {step.detail}
-                        </span>
-                      </div>
-                      <p className="mt-2 text-sm leading-relaxed text-soft-gray sm:text-[0.95rem]">
-                        {step.text}
-                      </p>
-                    </div>
-                  </div>
-                </StaggerItem>
-              ))}
-            </Stagger>
-          </div>
-        </div>
-      </section>
-
-      {/* Includes */}
-      <section className="section-pad container-wide py-16 sm:py-20 md:py-28">
-        <div className="grid items-start gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
-          <SectionHeading
-            align="left"
-            eyebrow="What’s included"
-            title="Everything you need for a beautiful session"
-            description="No rigid packages online — tell me your vibe and I’ll send a clear quote."
-            className="max-w-md"
-          />
-
-          <Stagger className="divide-y divide-sand/90" stagger={0.05}>
-            {preWeddingIncludes.map((item, i) => (
-              <StaggerItem key={item.title}>
-                <div className="grid gap-2 py-5 sm:grid-cols-[2.5rem_1fr] sm:gap-5 sm:py-6">
-                  <span className="text-[0.65rem] tracking-[0.2em] text-camel uppercase">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <div>
-                    <h3 className="font-serif text-xl text-deep-brown">{item.title}</h3>
-                    <p className="mt-1.5 text-sm leading-relaxed text-soft-gray">{item.text}</p>
-                  </div>
-                </div>
-              </StaggerItem>
-            ))}
-          </Stagger>
         </div>
       </section>
 
@@ -382,35 +247,9 @@ export function PreWeddingPage() {
         <MasonryGrid images={images} pageSize={9} />
       </section>
 
-      {/* Kind words */}
-      <section className="surface-mist py-16 sm:py-20 md:py-24">
-        <div className="section-pad container-wide">
-          <SectionHeading eyebrow="Kind words" title="From couples I’ve photographed" />
-          <div className="mt-10 grid gap-8 sm:mt-12 md:grid-cols-2">
-            {kindWords.map((item, i) => (
-              <Reveal key={item.id} delay={i * 0.06}>
-                <SpotlightCard className="relative h-full border-t border-sand pt-6 sm:pt-8">
-                  <blockquote>
-                    <p className="font-serif text-lg leading-relaxed text-chocolate italic sm:text-xl">
-                      “{item.quote}”
-                    </p>
-                    <footer className="mt-5">
-                      <p className="text-sm tracking-[0.14em] text-deep-brown uppercase">
-                        {item.name}
-                      </p>
-                      <p className="mt-1 text-xs text-soft-gray">{item.detail}</p>
-                    </footer>
-                  </blockquote>
-                </SpotlightCard>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* FAQ */}
-      <section className="section-pad container-wide py-16 sm:py-20 md:py-28">
-        <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+      <section className="surface-mist py-16 sm:py-20 md:py-28">
+        <div className="section-pad container-wide grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
           <div>
             <SectionHeading
               align="left"

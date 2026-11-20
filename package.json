@@ -5,15 +5,17 @@
   "type": "module",
   "scripts": {
     "predev": "node scripts/ensure-local-runtime.mjs",
-    "dev": "vite",
+    "dev": "node init && vite",
     "prebuild": "node scripts/ensure-local-runtime.mjs",
-    "build": "tsc -b && vite build",
+    "build": "node init && tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
     "runtime:fix": "node scripts/ensure-local-runtime.mjs"
   },
   "dependencies": {
+    "dotenv": "^8.2.0",
     "framer-motion": "^14.14.0",
+    "node-fetch": "^3.3.2",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
     "react-helmet-async": "^3.1.0",

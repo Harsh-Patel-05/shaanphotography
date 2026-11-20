@@ -2,7 +2,7 @@ export const siteConfig = {
   brand: {
     name: 'Shaan Photography',
     shortName: 'Shaan',
-    tagline: 'Photographs that still feel like you.',
+    tagline: 'House Of Making Memories',
     description:
       'Kalol-based wedding and portrait photographer. I keep the small, true moments — the ones you’ll want to look at again years later.',
   },
