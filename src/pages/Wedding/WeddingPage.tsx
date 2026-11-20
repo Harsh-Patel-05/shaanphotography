@@ -6,8 +6,6 @@ import { Magnet } from '../../components/animations/Magnet'
 import { PageTransition } from '../../components/animations/PageTransition'
 import { Reveal } from '../../components/animations/Reveal'
 import { SplitText } from '../../components/animations/SplitText'
-import { SpotlightCard } from '../../components/animations/SpotlightCard'
-import { Stagger, StaggerItem } from '../../components/animations/Stagger'
 import { Button } from '../../components/common/Button'
 import { CtaBand } from '../../components/common/CtaBand'
 import { SEO } from '../../components/common/SEO'
@@ -15,15 +13,7 @@ import { SectionHeading } from '../../components/common/SectionHeading'
 import { MasonryGrid } from '../../components/gallery/MasonryGrid'
 import { siteConfig } from '../../config/site'
 import { getUniqueCategoryImages, img, mediaIds } from '../../data/mediaMap'
-import { testimonials } from '../../data/testimonialsData'
-import {
-  weddingApproach,
-  weddingFaq,
-  weddingHero,
-  weddingIncludes,
-  weddingMoments,
-  weddingTimeline,
-} from '../../data/weddingData'
+import { weddingFaq, weddingHero } from '../../data/weddingData'
 
 function FaqItem({
   question,
@@ -80,11 +70,6 @@ export function WeddingPage() {
   const reduced = useReducedMotion()
   const [openFaq, setOpenFaq] = useState<number | null>(0)
   const heroImg = img(mediaIds.wedding.hero, 'Wedding').src
-  const weddingQuotes = testimonials.filter((t) =>
-    t.detail.toLowerCase().includes('wedding'),
-  )
-  const quotes =
-    weddingQuotes.length > 0 ? weddingQuotes : testimonials.slice(0, 2)
 
   return (
     <PageTransition>
@@ -165,129 +150,6 @@ export function WeddingPage() {
         </div>
       </section>
 
-      {/* Approach */}
-      <section className="section-pad container-wide py-16 sm:py-20 md:py-28">
-        <div className="grid gap-12 lg:grid-cols-12 lg:gap-14">
-          <div className="lg:col-span-5">
-            <SectionHeading
-              align="left"
-              eyebrow="Approach"
-              title="Present for the feeling, not the pose"
-              description="Your wedding isn’t a set. I cover it like a story — calm, close, and honest."
-              className="max-w-md"
-            />
-          </div>
-          <div className="lg:col-span-7">
-            <div className="grid gap-8 sm:grid-cols-3 sm:gap-6">
-              {weddingApproach.map((item, i) => (
-                <Reveal key={item.title} delay={i * 0.07}>
-                  <SpotlightCard className="h-full border-t border-sand pt-6">
-                    <p className="text-[0.65rem] tracking-[0.26em] text-camel uppercase">
-                      {item.num}
-                    </p>
-                    <h3 className="mt-3 font-serif text-xl text-deep-brown sm:text-2xl">
-                      {item.title}
-                    </h3>
-                    <p className="mt-3 text-sm leading-relaxed text-soft-gray">{item.text}</p>
-                  </SpotlightCard>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Day timeline + featured moments */}
-      <section className="surface-mist py-16 sm:py-20 md:py-28">
-        <div className="section-pad container-wide">
-          <SectionHeading
-            eyebrow="The day"
-            title="How coverage usually unfolds"
-            description="Every wedding is different — this is the rhythm I plan around."
-          />
-
-          <Stagger className="mt-10 grid gap-0 sm:mt-14 md:grid-cols-2 lg:grid-cols-4" stagger={0.06}>
-            {weddingTimeline.map((step, i) => (
-              <StaggerItem key={step.title}>
-                <div
-                  className={`border-t border-sand/90 py-6 md:border-t-0 md:py-0 ${
-                    i === 0
-                      ? 'md:pl-0'
-                      : 'md:border-l md:border-sand/90 md:px-5 lg:px-6'
-                  }`}
-                >
-                  <p className="text-[0.65rem] tracking-[0.22em] text-camel uppercase">
-                    {String(i + 1).padStart(2, '0')}
-                  </p>
-                  <h3 className="mt-3 font-serif text-2xl text-deep-brown">{step.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-soft-gray">{step.text}</p>
-                </div>
-              </StaggerItem>
-            ))}
-          </Stagger>
-
-          <div className="mt-14 grid gap-6 sm:mt-16 md:grid-cols-3 md:gap-8">
-            {weddingMoments.map((moment, i) => (
-              <Reveal key={moment.title} delay={i * 0.07}>
-                <article className="border-t border-sand pt-6">
-                  <p className="text-[0.65rem] tracking-[0.2em] text-camel uppercase">
-                    {moment.detail}
-                  </p>
-                  <h3 className="mt-2 font-serif text-xl text-deep-brown sm:text-2xl">
-                    {moment.title}
-                  </h3>
-                  <p className="mt-2 text-sm text-soft-gray">{moment.text}</p>
-                </article>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Includes */}
-      <section className="section-pad container-wide py-16 sm:py-20 md:py-28">
-        <div className="grid items-start gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
-          <SectionHeading
-            align="left"
-            eyebrow="What’s included"
-            title="Clear coverage. No package maze."
-            description="Tell me your date and venues — I’ll send a quote that fits your day, not a rigid template."
-            className="max-w-md"
-          />
-
-          <Stagger className="divide-y divide-sand/90" stagger={0.05}>
-            {weddingIncludes.map((item, i) => (
-              <StaggerItem key={item.title}>
-                <div className="grid gap-2 py-5 sm:grid-cols-[2.5rem_1fr] sm:gap-5 sm:py-6">
-                  <span className="text-[0.65rem] tracking-[0.2em] text-camel uppercase">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <div>
-                    <h3 className="font-serif text-xl text-deep-brown">{item.title}</h3>
-                    <p className="mt-1.5 text-sm leading-relaxed text-soft-gray">{item.text}</p>
-                  </div>
-                </div>
-              </StaggerItem>
-            ))}
-          </Stagger>
-        </div>
-      </section>
-
-      {/* Quote band — text only so we never pull non-wedding photos */}
-      <section className="surface-ink py-16 sm:py-20 md:py-24">
-        <div className="section-pad container-wide">
-          <p className="text-[0.68rem] tracking-[0.28em] text-camel uppercase">Kept with care</p>
-          <BlurText
-            as="p"
-            text="The glances, the vows, the soft chaos in between."
-            className="mt-4 max-w-2xl font-serif text-[clamp(1.6rem,4.2vw,3.2rem)] text-ivory italic"
-            delay={70}
-            blur={12}
-            animateBy="words"
-          />
-        </div>
-      </section>
-
       {/* Gallery — Wedding category only */}
       <section className="section-pad container-wide py-16 sm:py-20 md:py-28">
         <div className="mb-8 flex flex-col gap-4 sm:mb-10 sm:flex-row sm:items-end sm:justify-between">
@@ -315,38 +177,9 @@ export function WeddingPage() {
         )}
       </section>
 
-      {/* Kind words */}
-      <section className="surface-stone py-16 sm:py-20 md:py-24">
-        <div className="section-pad container-wide">
-          <SectionHeading
-            eyebrow="Kind words"
-            title="From couples I’ve photographed"
-          />
-          <div className="mt-10 grid gap-8 sm:mt-12 md:grid-cols-2">
-            {quotes.map((item, i) => (
-              <Reveal key={item.id} delay={i * 0.06}>
-                <SpotlightCard className="relative h-full border-t border-camel/30 pt-6 sm:pt-8">
-                  <blockquote>
-                    <p className="font-serif text-lg leading-relaxed text-chocolate italic sm:text-xl">
-                      “{item.quote}”
-                    </p>
-                    <footer className="mt-5">
-                      <p className="text-sm tracking-[0.14em] text-deep-brown uppercase">
-                        {item.name}
-                      </p>
-                      <p className="mt-1 text-xs text-soft-gray">{item.detail}</p>
-                    </footer>
-                  </blockquote>
-                </SpotlightCard>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* FAQ */}
-      <section className="section-pad container-wide py-16 sm:py-20 md:py-28">
-        <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+      <section className="surface-mist py-16 sm:py-20 md:py-28">
+        <div className="section-pad container-wide grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
           <div>
             <SectionHeading
               align="left"
@@ -381,7 +214,7 @@ export function WeddingPage() {
       </section>
 
       {/* Next steps */}
-      <section className="surface-mist py-14 sm:py-16">
+      <section className="surface-stone py-14 sm:py-16">
         <div className="section-pad container-wide">
           <Reveal>
             <div className="grid gap-6 border border-sand/80 bg-warm-white/55 px-6 py-8 sm:px-8 md:grid-cols-[1.2fr_0.8fr] md:items-center md:gap-10">

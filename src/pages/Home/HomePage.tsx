@@ -10,7 +10,6 @@ import { Reveal } from '../../components/animations/Reveal'
 import { ScrollFloat } from '../../components/animations/ScrollFloat'
 import { ShinyText } from '../../components/animations/ShinyText'
 import { SplitText } from '../../components/animations/SplitText'
-import { SpotlightCard } from '../../components/animations/SpotlightCard'
 import { TiltCard } from '../../components/animations/TiltCard'
 import { Button } from '../../components/common/Button'
 import { CtaBand } from '../../components/common/CtaBand'
@@ -20,7 +19,7 @@ import { SectionHeading } from '../../components/common/SectionHeading'
 import { VideoPlayer } from '../../components/common/VideoPlayer'
 import { MasonryGrid } from '../../components/gallery/MasonryGrid'
 import { siteConfig } from '../../config/site'
-import { heroVideo, videos } from '../../data/galleryData'
+import { heroVideo, videos } from '../../data/filmData'
 import {
   featuredCollections,
   homeAboutImage,
@@ -31,7 +30,6 @@ import {
 } from '../../data/mediaMap'
 import { aboutStats } from '../../data/aboutData'
 import { services } from '../../data/servicesData'
-import { testimonials } from '../../data/testimonialsData'
 
 const marqueeItems = [
   'Weddings',
@@ -158,13 +156,10 @@ export function HomePage() {
                   </ClipReveal>
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-deep-brown/55 via-transparent to-transparent opacity-0 transition duration-500 group-hover:opacity-100" />
                 </TiltCard>
-                <div className="mt-3 flex items-baseline justify-between gap-2 sm:mt-4">
+                <div className="mt-3 sm:mt-4">
                   <p className="font-serif text-lg text-deep-brown sm:text-2xl">{col.title}</p>
-                  <span className="text-[0.6rem] tracking-[0.2em] text-soft-gray/70 uppercase">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
                 </div>
-                <p className="text-xs text-soft-gray sm:text-sm">{col.subtitle}</p>
+                <p className="mt-1 text-xs text-soft-gray sm:text-sm">{col.subtitle}</p>
               </Link>
             </Reveal>
           ))}
@@ -268,7 +263,7 @@ export function HomePage() {
             description="Tap any photo to view it larger."
           />
           <div className="mt-10 sm:mt-12">
-            <MasonryGrid images={homeSelectedGallery} />
+            <MasonryGrid images={homeSelectedGallery} pageSize={9} />
           </div>
           <div className="mt-10 flex justify-center sm:mt-12">
             <Button to="/portfolio">Full Portfolio</Button>
@@ -306,7 +301,7 @@ export function HomePage() {
           />
         </ScrollFloat>
         <div className="absolute inset-0 bg-gradient-to-t from-deep-brown/70 via-deep-brown/30 to-deep-brown/15" />
-        <div className="section-pad relative z-10 flex h-full items-end pb-10 sm:pb-14">
+        <div className="section-pad container-wide relative z-10 flex h-full items-end pb-10 sm:pb-14">
           <BlurText
             as="p"
             text="Light, memory, and the spaces between."
@@ -315,33 +310,6 @@ export function HomePage() {
             blur={12}
             animateBy="words"
           />
-        </div>
-      </section>
-
-      <section className="section-pad container-wide py-16 sm:py-20 md:py-28">
-        <SectionHeading eyebrow="Kind Words" title="What clients say" />
-        <div className="mt-10 grid gap-8 sm:mt-14 md:grid-cols-2">
-          {testimonials.map((item, i) => (
-            <Reveal key={item.id} delay={i * 0.06}>
-              <SpotlightCard className="group relative border-t border-sand pt-6 sm:pt-8">
-                <blockquote>
-                  <span
-                    aria-hidden
-                    className="absolute top-4 right-0 font-serif text-5xl text-camel/25 transition duration-500 group-hover:text-camel/40 sm:text-6xl"
-                  >
-                    ”
-                  </span>
-                  <p className="font-serif text-lg leading-relaxed text-chocolate italic sm:text-xl md:text-2xl">
-                    “{item.quote}”
-                  </p>
-                  <footer className="mt-5 sm:mt-6">
-                    <p className="text-sm tracking-[0.14em] text-deep-brown uppercase">{item.name}</p>
-                    <p className="mt-1 text-xs text-soft-gray">{item.detail}</p>
-                  </footer>
-                </blockquote>
-              </SpotlightCard>
-            </Reveal>
-          ))}
         </div>
       </section>
 

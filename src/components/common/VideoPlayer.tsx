@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
-import type { VideoItem } from '../../data/galleryData'
+import type { VideoItem } from '../../data/filmData'
 
 type Props = {
   video: VideoItem
@@ -113,7 +113,7 @@ export function VideoPlayer({ video }: Props) {
           className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]"
           src={video.src}
           poster={video.poster}
-          preload="metadata"
+          preload="none"
           playsInline
           controls={playing}
           muted={!playing}

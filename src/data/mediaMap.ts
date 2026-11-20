@@ -201,4 +201,6 @@ export function assertCategoryMedia() {
   img(mediaIds.home.collections.couple, 'Couple Photography')
 }
 
-assertCategoryMedia()
+if (import.meta.env.DEV) {
+  assertCategoryMedia()
+}

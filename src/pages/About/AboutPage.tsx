@@ -26,7 +26,6 @@ import {
 } from '../../config/site'
 import {
   aboutBtsCaptions,
-  aboutDelivery,
   aboutFaq,
   aboutFocus,
   aboutHero,
@@ -37,7 +36,6 @@ import {
   aboutStory,
 } from '../../data/aboutData'
 import { img, mediaIds } from '../../data/mediaMap'
-import { testimonials } from '../../data/testimonialsData'
 import logo from '../../assets/logos/shaan-logo-dark.png'
 
 const aboutPortrait = img(mediaIds.about.portrait).src
@@ -191,6 +189,8 @@ export function AboutPage() {
                         alt={`${siteConfig.brand.shortName} — photographer`}
                         className="aspect-[4/5] w-full object-cover"
                         loading="eager"
+                        fetchPriority="high"
+                        decoding="async"
                       />
                       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-deep-brown/25 via-transparent to-transparent" />
                     </div>
@@ -461,29 +461,6 @@ export function AboutPage() {
         </div>
       </section>
 
-      {/* Delivery details */}
-      <section className="section-pad container-wide py-16 sm:py-20 md:py-28">
-        <SectionHeading
-          eyebrow="Delivery"
-          title="What you walk away with"
-          description="Everything is finished carefully — so your gallery feels warm, clear, and easy to live with."
-        />
-
-        <div className="mt-10 grid gap-8 sm:mt-14 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
-          {aboutDelivery.map((item, i) => (
-            <Reveal key={item.title} delay={i * 0.06}>
-              <div className="border-t border-sand pt-5">
-                <p className="text-[0.65rem] tracking-[0.22em] text-camel uppercase">
-                  {String(i + 1).padStart(2, '0')}
-                </p>
-                <h3 className="mt-3 font-serif text-xl text-deep-brown">{item.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-soft-gray">{item.text}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
       {/* Behind the scenes */}
       <section className="surface-ink py-16 sm:py-20 md:py-28">
         <div className="section-pad container-wide">
@@ -522,41 +499,6 @@ export function AboutPage() {
               </Reveal>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Kind words */}
-      <section className="section-pad container-wide py-16 sm:py-20 md:py-28">
-        <SectionHeading
-          eyebrow="Kind words"
-          title="What clients remember"
-          description="A few notes from couples and families I’ve photographed."
-        />
-
-        <div className="mt-10 grid gap-8 sm:mt-14 md:grid-cols-2">
-          {testimonials.slice(0, 4).map((item, i) => (
-            <Reveal key={item.id} delay={i * 0.06}>
-              <SpotlightCard className="relative h-full border-t border-sand pt-6 sm:pt-8">
-                <blockquote>
-                  <span
-                    aria-hidden
-                    className="absolute top-4 right-0 font-serif text-5xl text-camel/25 sm:text-6xl"
-                  >
-                    ”
-                  </span>
-                  <p className="font-serif text-lg leading-relaxed text-chocolate italic sm:text-xl">
-                    “{item.quote}”
-                  </p>
-                  <footer className="mt-5 sm:mt-6">
-                    <p className="text-sm tracking-[0.14em] text-deep-brown uppercase">
-                      {item.name}
-                    </p>
-                    <p className="mt-1 text-xs text-soft-gray">{item.detail}</p>
-                  </footer>
-                </blockquote>
-              </SpotlightCard>
-            </Reveal>
-          ))}
         </div>
       </section>
 

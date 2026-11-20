@@ -35,6 +35,11 @@ export function MasonryGrid({ images, className = '', pageSize }: Props) {
     () => uniqueImages.slice(0, visibleCount),
     [uniqueImages, visibleCount],
   )
+  const indexById = useMemo(() => {
+    const map = new Map<string, number>()
+    uniqueImages.forEach((image, i) => map.set(image.id, i))
+    return map
+  }, [uniqueImages])
   const hasMore = pageSize != null && visibleCount < uniqueImages.length
 
   const onPrev = () => {
@@ -52,24 +57,23 @@ export function MasonryGrid({ images, className = '', pageSize }: Props) {
       <div
         className={`columns-1 gap-x-4 sm:columns-2 sm:gap-x-5 lg:columns-3 lg:gap-x-6 ${className}`}
       >
-        <AnimatePresence mode="popLayout">
+        <AnimatePresence initial={false}>
           {items.map((image, i) => {
-            const fullIndex = uniqueImages.findIndex((img) => img.id === image.id)
+            const fullIndex = indexById.get(image.id) ?? i
             return (
               <motion.button
                 key={image.id}
                 type="button"
-                layout={!reduced}
-                initial={reduced ? false : { opacity: 0, y: 28, scale: 0.985 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.97 }}
+                initial={reduced ? false : { opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
                 transition={{
-                  duration: 0.55,
-                  delay: Math.min((i % (pageSize ?? 12)) * 0.045, 0.4),
+                  duration: 0.4,
+                  delay: Math.min((i % (pageSize ?? 12)) * 0.03, 0.28),
                   ease: [0.22, 1, 0.36, 1],
                 }}
                 className="group film-frame relative mb-4 w-full break-inside-avoid overflow-hidden bg-sand/25 text-left sm:mb-5 lg:mb-6"
-                onClick={() => setIndex(fullIndex >= 0 ? fullIndex : i)}
+                onClick={() => setIndex(fullIndex)}
                 aria-label={`View ${image.alt}`}
               >
                 <img

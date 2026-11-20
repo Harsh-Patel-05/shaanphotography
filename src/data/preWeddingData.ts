@@ -5,24 +5,6 @@ export const preWeddingHero = {
     'A few easy hours before the wedding rush — we pick a place you like, follow the light, and keep the photos feeling like the two of you.',
 }
 
-export const preWeddingApproach = [
-  {
-    num: '01',
-    title: 'Easy energy',
-    text: 'We keep it light — walks, laughs, and prompts that never feel like a studio drill.',
-  },
-  {
-    num: '02',
-    title: 'Light first',
-    text: 'Golden hour, open shade, quiet corners — locations chosen for how they feel, not just how they look.',
-  },
-  {
-    num: '03',
-    title: 'You, honestly',
-    text: 'Styled enough to feel special, real enough to still feel like yourselves.',
-  },
-]
-
 export const preWeddingLocations = [
   {
     title: 'By the water',
@@ -39,62 +21,6 @@ export const preWeddingLocations = [
     location: 'Outdoors',
     text: 'Hills, dusk light, and space for the two of you.',
   },
-]
-
-export const preWeddingFlow = [
-  {
-    title: 'We pick a vibe',
-    detail: 'Mood + place',
-    text: 'Share looks you love — beach, city, heritage, hills — and we’ll shortlist what fits.',
-  },
-  {
-    title: 'We plan lightly',
-    detail: 'Timing',
-    text: 'Outfit notes, light windows, and a calm route so the session stays easy.',
-  },
-  {
-    title: 'We shoot gently',
-    detail: 'On location',
-    text: 'A mix of candid and lightly guided frames — never stiff, never rushed.',
-  },
-  {
-    title: 'You receive',
-    detail: 'Gallery',
-    text: 'A warm, full story set in a private gallery, ready to share and print.',
-  },
-]
-
-export const preWeddingIncludes = [
-  {
-    title: 'Location ideas & planning',
-    text: 'Suggestions based on your city, travel comfort, and the mood you want.',
-  },
-  {
-    title: 'Gentle posing guidance',
-    text: 'Prompts that help you move naturally — no forced poses.',
-  },
-  {
-    title: 'Golden-hour or destination options',
-    text: 'Local sessions or a short trip away — planned around good light.',
-  },
-  {
-    title: 'Full story set of images',
-    text: 'A complete edit of your session, not just a handful of selects.',
-  },
-  {
-    title: 'Print-ready files',
-    text: 'High-resolution images ready for albums, frames, and invites.',
-  },
-  {
-    title: 'Private online gallery',
-    text: 'Easy downloads and sharing for family and friends.',
-  },
-]
-
-export const preWeddingMoods = [
-  { title: 'Romantic soft', text: 'Warm light, quiet closeness, gentle movement.' },
-  { title: 'Editorial calm', text: 'Clean lines, heritage walls, film-still frames.' },
-  { title: 'Playful ease', text: 'Laughter, walking shots, unforced chemistry.' },
 ]
 
 export const preWeddingFaq = [

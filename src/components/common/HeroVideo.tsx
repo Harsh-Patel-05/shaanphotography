@@ -92,6 +92,8 @@ export function HeroVideo({ src, poster, className = '' }: Props) {
           src={poster}
           alt=""
           aria-hidden
+          fetchPriority="high"
+          decoding="async"
           className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
             shouldMount && ready ? 'opacity-0' : 'opacity-100'
           }`}
